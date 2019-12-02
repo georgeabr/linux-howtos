@@ -40,3 +40,10 @@ Enable `source` repository, and run below:
 ```
 sudo apt-get build-dep mesa
 ```
+
+You need to locat the file where `wayland` is enabled, end remove it.
+You don't need to build `mesa` with `wayland` enabled, if you don't use it.
+Locate word `wayland` in source code, and remove it:
+```
+grep -R "wayland" .
+```
