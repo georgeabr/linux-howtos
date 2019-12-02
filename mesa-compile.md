@@ -27,6 +27,7 @@ To revert to old intel driver, use below:
 unset MESA_LOADER_DRIVER_OVERRIDE
 ```
 Links for reference:
+
 https://www.mesa3d.org/install.html
 
 https://lists.freedesktop.org/archives/mesa-dev/2019-February/215576.html
