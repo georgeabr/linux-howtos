@@ -31,3 +31,12 @@ Links for reference:
 https://www.mesa3d.org/install.html
 
 https://lists.freedesktop.org/archives/mesa-dev/2019-February/215576.html
+
+You also need the latest `libdrm`:
+https://dri.freedesktop.org/libdrm/
+
+To build mesa, you need libraries required by its source package.
+Enable `source` repository, and run below:
+```
+sudo apt-get build-dep mesa
+```
