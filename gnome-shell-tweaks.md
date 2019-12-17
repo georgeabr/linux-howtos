@@ -29,3 +29,7 @@ https://github.com/hardpixel/unite-shell
 https://github.com/gTile
 4. **Remove Audio Device Selection Dialog**  
 https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
+5. **Dash to dock**  
+https://micheleg.github.io/dash-to-dock/
+6. **Clock override** - change top bar clock date/time format  
+https://github.com/stuartlangridge/gnome-shell-clock-override
