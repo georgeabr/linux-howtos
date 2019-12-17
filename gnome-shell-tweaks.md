@@ -4,6 +4,16 @@
 You must enable intel `TearFree` option in xorg conf file. Then install the extension below:  
 https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect
 
+## Change shortcuts for switching workspace
+If you want to use `Win+1/2/3` to move between workspaces, first clear these shortcuts.  
+Gnome shell uses them to switch between open applications.
+```
+gsettings set org.gnome.shell.keybindings switch-to-application-1 []
+gsettings set org.gnome.shell.keybindings switch-to-application-2 []
+gsettings set org.gnome.shell.keybindings switch-to-application-3 []
+gsettings set org.gnome.shell.keybindings switch-to-application-4 []
+```
+
 ## Change the top bar font
 You need the `User themes` extension installed.
 1. Create and edit a new gnome shell theme:
