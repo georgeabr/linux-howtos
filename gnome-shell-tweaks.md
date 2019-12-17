@@ -1,4 +1,4 @@
-# How to do stuff
+# How to customise your gnome shell appearance
 
 ## Screen tearing in gnome shell
 You must enable intel `TearFree` option in xorg conf file. Then install the extension below:  
