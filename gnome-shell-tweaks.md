@@ -19,3 +19,13 @@ stage {
 }
 ```
 3. Launch `Gnome Tweaks` and apply the new shell theme.
+
+## Interesting gnome shell extensions
+1. **Time++** - todo manager  
+https://github.com/zagortenay333/timepp__gnome
+2. **Unite** - Removes titlebars on maximized windows, shows title in gnome top bar, with close/maximise buttons  
+https://github.com/hardpixel/unite-shell
+3. **Gtile** - A window tiling extension for Gnome  
+https://github.com/gTile
+4. **Remove Audio Device Selection Dialog**  
+https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
