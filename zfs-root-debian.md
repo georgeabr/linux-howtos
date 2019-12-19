@@ -1,3 +1,4 @@
+# ZFS on root (/) for Debian testing
 ## Use a proper mirror for `debootstrap`
 When using debootstrap, choose this mirror  
 http://mirror.asergo.com/debian/
