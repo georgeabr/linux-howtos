@@ -6,5 +6,5 @@ http://mirror.asergo.com/debian/
 ```
 apt install eatmydata  
 exec 3< /usr/lib/x86_64-linux-gnu/libeatmydata.so  
-LD_PRELOAD=/proc/$$/fd/3 debootstrap bullseye /mnt  
+LD_PRELOAD=/proc/$$/fd/3 debootstrap bullseye /mnt http://mirror.asergo.com/debian/  
 ```
