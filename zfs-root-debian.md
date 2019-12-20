@@ -10,3 +10,11 @@ apt install eatmydata
 exec 3< /usr/lib/x86_64-linux-gnu/libeatmydata.so
 LD_PRELOAD=/proc/$$/fd/3 debootstrap bullseye /mnt http://mirror.asergo.com/debian/
 ```
+
+Get record size of zfs pools
+```
+zfs get recordsize,compression testpool
+```
+
+More info on ZFS tuning  
+http://open-zfs.org/wiki/Performance_tuning
