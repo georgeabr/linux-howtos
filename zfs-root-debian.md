@@ -13,7 +13,7 @@ LD_PRELOAD=/proc/$$/fd/3 debootstrap bullseye /mnt http://mirror.asergo.com/debi
 
 Get record size of zfs pools
 ```
-zfs get recordsize,compression testpool
+zfs get recordsize,compression
 ```
 
 More info on ZFS tuning  
