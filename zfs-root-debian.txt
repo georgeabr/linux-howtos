@@ -1,0 +1,197 @@
+sudo apt update
+sudo -i
+nano /etc/apt/sources.list
+# add "contrib" to the repos
+apt update
+apt install --yes debootstrap gdisk dkms dpkg-dev linux-headers-$(uname -r)
+apt install --yes --no-install-recommends zfs-dkms
+modprobe zfs
+apt install --yes zfsutils-linux
+# DISK=ata-INTEL_SSDSCKJW240H6_CVTQ5480034U240B-part10
+# with "gdisk", create two partitions, type "bf01"
+# partition 1 - size 512M, for boot
+# partition 2 - rest of disk (press "enter"), for holding data
+# reboot, so that udev shows the new partitions - part10, part11
+# create tbe BOOT pool - part10
+zpool create -o ashift=12 -d \
+    -o feature@async_destroy=enabled \
+    -o feature@bookmarks=enabled \
+    -o feature@embedded_data=enabled \
+    -o feature@empty_bpobj=enabled \
+    -o feature@enabled_txg=enabled \
+    -o feature@extensible_dataset=enabled \
+    -o feature@filesystem_limits=enabled \
+    -o feature@hole_birth=enabled \
+    -o feature@large_blocks=enabled \
+    -o feature@lz4_compress=enabled \
+    -o feature@spacemap_histogram=enabled \
+    -o feature@userobj_accounting=enabled \
+    -o feature@zpool_checkpoint=enabled \
+    -o feature@spacemap_v2=enabled \
+    -o feature@project_quota=enabled \
+    -o feature@resilver_defer=enabled \
+    -o feature@allocation_classes=enabled \
+    -O acltype=posixacl -O canmount=off -O compression=lz4 -O devices=off \
+    -O normalization=formD -O relatime=on -O xattr=sa \
+    -O mountpoint=/ -R /mnt bpool ata-INTEL_SSDSCKJW240H6_CVTQ5480034U240B-part10
+    
+# create the ROOT pool - part11
+zpool create -o ashift=12 \
+    -O acltype=posixacl -O canmount=off -O compression=lz4 \
+    -O dnodesize=auto -O normalization=formD -O relatime=on -O xattr=sa \
+    -O mountpoint=/ -R /mnt rpool ata-INTEL_SSDSCKJW240H6_CVTQ5480034U240B-part11
+    
+zfs create -o canmount=off -o mountpoint=none rpool/ROOT
+zfs create -o canmount=off -o mountpoint=none bpool/BOOT
+zfs create -o canmount=noauto -o mountpoint=/ rpool/ROOT/debian
+zfs mount rpool/ROOT/debian
+zfs create -o canmount=noauto -o mountpoint=/boot bpool/BOOT/debian
+zfs mount bpool/BOOT/debian
+
+zfs create rpool/home
+zfs create -o mountpoint=/root             rpool/home/root
+zfs create -o canmount=off                 rpool/var
+zfs create -o canmount=off                 rpool/var/lib
+zfs create                                 rpool/var/log
+zfs create                                 rpool/var/spool
+zfs create -o canmount=off                 rpool/usr
+zfs create                                 rpool/usr/local
+zfs create                                 rpool/var/mail
+zfs create                                 rpool/var/lib/AccountsService
+
+apt install eatmydata
+exec 3< /usr/lib/x86_64-linux-gnu/libeatmydata.so
+LD_PRELOAD=/proc/$$/fd/3 debootstrap bullseye /mnt http://mirror.asergo.com/debian/
+zfs set devices=off rpool
+echo debian > /mnt/etc/hostname
+apt install firmware-linux-nonfree
+apt-get install firmware-iwlwifi
+
+nano /mnt/etc/apt/sources.list
+## only these two lines should be present
+deb http://mirror.asergo.com/debian bullseye main contrib
+deb-src http://mirror.asergo.com/debian bullseye main contrib
+
+mount --rbind /dev  /mnt/dev
+mount --rbind /proc /mnt/proc
+mount --rbind /sys  /mnt/sys
+chroot /mnt /usr/bin/env aa=a bash --login
+ln -s /proc/self/mounts /etc/mtab
+apt update
+apt install --yes locales
+dpkg-reconfigure locales
+# select BOTH en_GB.UTF-8 AND en_US.UTF-8
+dpkg-reconfigure tzdata
+apt install --yes dpkg-dev linux-headers-amd64 linux-image-amd64
+# apt install intel-microcode???
+
+apt install --yes zfs-initramfs
+mkdir /boot/efi
+# add UEFI partition to fstab, by PARTUUID
+# run "blkid", to find EFI partition ids
+echo PARTUUID=5ccfceee-6152-ef41-96c3-80932b05a7e3 \
+    /boot/efi vfat nofail,x-systemd.device-timeout=1 0 1 >> /etc/fstab
+# run this "mount" command, and do "ls /boot/efi" to see if it was mounted
+mount -a
+apt install --yes grub-efi-amd64 shim-signed
+
+# set root password
+passwd
+
+nano /etc/systemd/system/zfs-import-bpool.service
+
+# add the below lines to this systemd unit
+[Unit]
+DefaultDependencies=no
+Before=zfs-import-scan.service
+Before=zfs-import-cache.service
+    
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/zpool import -N -o cachefile=none bpool
+    
+[Install]
+WantedBy=zfs-import.target
+
+# then run this
+systemctl enable zfs-import-bpool.service
+
+cp /usr/share/systemd/tmp.mount /etc/systemd/system/
+systemctl enable tmp.mount
+
+# run this, should output "zfs"
+grub-probe /boot
+
+update-initramfs -u -k all
+
+
+nano /etc/default/grub
+# Set: GRUB_CMDLINE_LINUX="root=ZFS=rpool/ROOT/debian"
+# EDIT TO ADD NOUVEAU FIX ACPI_OSI
+
+update-grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi \
+    --bootloader-id=debian --recheck --no-floppy
+    
+#should output /boot .... zfs.mod
+ls /boot/grub/*/zfs.mod
+
+umount /boot/efi
+zfs set mountpoint=legacy bpool/BOOT/debian
+echo bpool/BOOT/debian /boot zfs \
+    nodev,relatime,x-systemd.requires=zfs-import-bpool.service 0 0 >> /etc/fstab
+mkdir /etc/zfs/zfs-list.cache
+touch /etc/zfs/zfs-list.cache/rpool
+ln -s /usr/lib/zfs-linux/zed.d/history_event-zfs-list-cacher.sh /etc/zfs/zed.d
+zed -F &
+
+# Verify that zed updated the cache by making sure this is not empty:
+# run "zed" above, then run this after 1 minute of wait
+cat /etc/zfs/zfs-list.cache/rpool
+
+# If it is empty, force a cache update and check again:
+# not really necessary, see above
+zfs set canmount=noauto rpool/ROOT/debian
+
+# Stop zed:
+fg
+# Press Ctrl-C.
+
+zfs snapshot bpool/BOOT/debian@install
+zfs snapshot rpool/ROOT/debian@install
+
+# exit chroot
+exit
+
+mount | grep -v zfs | tac | awk '/\/mnt/ {print $3}' | xargs -i{} umount -lf {}
+zpool export -a
+
+# reboot
+reboot
+
+===============================================
+AFTER REBOOT
+===============================================
+
+# Create a user account:
+zfs create rpool/home/george
+adduser george
+cp -a /etc/skel/. /home/george
+chown -R george:george /home/george
+usermod -a -G audio,cdrom,dip,floppy,netdev,plugdev,sudo,video george
+
+# upgrade system
+apt dist-upgrade --yes
+# add some software
+tasksel
+
+reboot
+
+
+
+
+
+
+
+
