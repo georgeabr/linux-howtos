@@ -1,5 +1,8 @@
 # How to customise your gnome shell appearance
 
+## Cannot enable gnome shell extensions  
+https://unix.stackexchange.com/questions/368306/cannot-re-renable-gnome-extensions
+
 ## Screen tearing in gnome shell (tested on ver. 3.34)
 You must enable intel `TearFree` option in xorg conf file. Then install the extension below:  
 https://github.com/kazysmaster/gnome-shell-extension-disable-unredirect
