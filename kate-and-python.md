@@ -3,9 +3,9 @@ Enable `LSP Client` plugin in `Kate`
 Download this file and add it to the `LSP client` config in `Kate`  
 https://invent.kde.org/kde/kate/blob/master/addons/lspclient/settings.json
 
-Install `LSP` for python3. See this - https://github.com/palantir/python-language-server:  
+Install `LSP` for python3, with `sudo` maybe. See this - https://github.com/palantir/python-language-server:  
 ```
-pip install python-language-server
+pip3 install python-language-server
 ```
 
 Run this, if issues:  
