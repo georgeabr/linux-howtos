@@ -19,7 +19,7 @@ sudo pip3 uninstall pyls python-language-server
 sudo pip3 install python-language-server
 ```
 
-Enable `Build plugin` in `Kate`  
+Enable `Build plugin` in `Kate`.  
 Add the line below to the `build` target in `Kate`:  
 ```
 konsole -e sh -c 'python3 "%f";printf "\n"; read -n 1 -s -r -p "Press any key to continue" '
