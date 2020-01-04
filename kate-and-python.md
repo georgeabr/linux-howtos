@@ -12,5 +12,5 @@ sudo pip3 install python-language-server
 
 Add the line below to the `build` target in `Kate`:  
 ```
-konsole -e sh -c 'python3 "%f";read -n 1 -s -r -p "Press any key to continue" '
+konsole -e sh -c 'python3 "%f";printf "\n"; read -n 1 -s -r -p "Press any key to continue" '
 ```
