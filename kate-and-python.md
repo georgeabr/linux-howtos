@@ -8,12 +8,12 @@ https://invent.kde.org/kde/kate/blob/master/addons/lspclient/settings.json
 pip3 install python-language-server
 ```
 
-3.1 Run this, if issues:  
+3.1. Run this, if issues:  
 ```
 pip install -U setuptools
 ```
 
-3.2 Uninstall `pyls` and `python-language-server` and install only `python-language-server`.  
+3.2. Uninstall `pyls` and `python-language-server` and install only `python-language-server`.  
 ```
 sudo pip3 uninstall pyls python-language-server
 sudo pip3 install python-language-server
