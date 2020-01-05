@@ -1,3 +1,5 @@
+### `LSP client` in `Kate`
+
 1. Enable `LSP Client` plugin in `Kate`  
 
 2. Download this file and add it to the `LSP client` config in `Kate`  
@@ -24,7 +26,7 @@ Add the line below to the `build` target in `Kate`:
 konsole -e sh -c 'python3 "%f";printf "\n"; read -n 1 -s -r -p "Press any key to continue" '
 ```
 
-Use `Projects` in `Kate` for your files.  
+### Use `Projects` in `Kate` for your files.  
 They will be managed as a project by `Kate` (all files present in `Projects` tab).  
 Create the file `.kateproject` (exactly this name) in a folder where you have `.py` files.  
 Paste the contents below in this file. Escape characters *inside* the `build` command `\` -> `\\`, `"` -> `\"`.   
