@@ -26,8 +26,8 @@ konsole -e sh -c 'python3 "%f";printf "\n"; read -n 1 -s -r -p "Press any key to
 
 Use `Projects` in `Kate` for your files.  
 They will be managed as a project by `Kate` (all files present in `Projects` tab).  
-Create the file `.kateproject` (exactly this name) in a folder where you have `.py` files.
-Paste the contents below in this file. Escape characters in the `build` command `\` -> `\\`, `"` -> `\"`.   
+Create the file `.kateproject` (exactly this name) in a folder where you have `.py` files.  
+Paste the contents below in this file. Escape characters *inside* the `build` command `\` -> `\\`, `"` -> `\"`.   
 More about escape characters in JSON - https://www.freeformatter.com/json-escape.html  
 
 ```
