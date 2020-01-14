@@ -7,7 +7,7 @@ Add the following in `/etc/sysctl.conf`:
 vm.dirty_bytes = 16777216
 vm.dirty_background_bytes = 4194304
 ```
-The run
+Then run to apply immediately
 ```
 sudo sysctl -p
 ```
