@@ -6,6 +6,7 @@ Add the following in `/etc/sysctl.conf`:
 ```
 vm.dirty_bytes = 16777216
 vm.dirty_background_bytes = 4194304
+vm.swappiness= 15
 ```
 Then run to apply immediately
 ```
