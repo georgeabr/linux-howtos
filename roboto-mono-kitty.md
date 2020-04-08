@@ -11,3 +11,5 @@ Add these lines to `~/.config/fontconfig/fonts.conf`:
     </edit>
 </match>
 ```
+Update the font cache:  
+`fc-cache -r`
