@@ -1,6 +1,6 @@
 from https://the-empire.systems/posts/2020-03-06-Arch-Linux-Router/
 
-Use Arch Linux as a Router
+Use Arch Linux as a Router  
 This article will walk through setting up Arch Linux as a simple router. Throughout the article we will refer to the following interfaces:
 
 eth0: WAN interface
@@ -11,8 +11,8 @@ We will assume the following subnet is desired for the LAN:
 
 10.10.10.0/24
 
-Replace the interface names and subnet in the article as desired/needed.
-LAN Networking Setup:
+Replace the interface names and subnet in the article as desired/needed.  
+LAN Networking Setup:  
 Assign a Static Internal IP Address For The LAN Interface:
 
 This process will vary based on if a different network manager is installed on the system. These steps will assume no additional network manager is installed and will use systemd-networkd.
@@ -71,9 +71,9 @@ Enable the network-online systemd service:
 sudo systemctl enable systemd-networkd-wait-online.service
 
 Now, start and enable the DHCP service on the LAN interface:
-
+```
 sudo systemctl enable --now dhcpd4@eth1.service
-
+```
 With that done, any device that connects to that LAN port on your Arch device should get an IP via DHCP in the range of 10.10.10.10-10.10.10.250.
 
 However, none of those devices will have internet access until you set up masquerading through iptables.
@@ -118,6 +118,6 @@ User=root
 WantedBy=multi-user.target
 ```
 Start and enable the newly created service:
-
+```
 sudo systemctl enable --now router.service
-
+```
