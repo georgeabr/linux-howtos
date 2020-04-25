@@ -2,22 +2,22 @@ from https://the-empire.systems/posts/2020-03-06-Arch-Linux-Router/
 
 Use Arch Linux as a Router  
 This article will walk through setting up Arch Linux as a simple router. Throughout the article we will refer to the following interfaces:
-
+```
 eth0: WAN interface
 
 eth1: LAN interface
-
+```
 We will assume the following subnet is desired for the LAN:
-
+```
 10.10.10.0/24
-
+```
 Replace the interface names and subnet in the article as desired/needed.  
 LAN Networking Setup:  
 Assign a Static Internal IP Address For The LAN Interface:
 
-This process will vary based on if a different network manager is installed on the system. These steps will assume no additional network manager is installed and will use systemd-networkd.
+This process will vary based on if a different network manager is installed on the system. These steps will assume no additional network manager is installed and will use `systemd-networkd`.
 
-Create the file /etc/systemd/network/21-dhcpd-wired.network with the following contents:
+Create the file `/etc/systemd/network/21-dhcpd-wired.network` with the following contents:
 ```
 [Match]
 Name=eth1
@@ -26,8 +26,9 @@ Name=eth1
 Address=10.10.10.1
 ```
 Then start and enable systemd-networkd:
-
+```
 sudo systemctl enable --now systemd-networkd.service
+```
 Set Up a DHCP Server For The LAN:
 
 Most of the DHCP server setup is derived from the awesome Arch Wiki so feel free to check out the documentation there for more information.
@@ -82,12 +83,12 @@ Masquerading:
 Masquerading is needed in order for the new LAN interface to have internet access using the WAN interface's connection.
 
 Before that will work IP forwarding needs to be enabled:
-
+```
 echo 'net.ipv4.ip_forward=1' | sudo tee -a /etc/sysctl.d/10-ip_forward.conf && sudo sysctl -p
-
+```
 This simple script can be used to load the necessary iptables rules to set up Arch to masquerade the two interfaces.
 
-Create /opt/scripts/router.sh with the following content:
+Create `/opt/scripts/router.sh` with the following content:
 ```
 #!/usr/bin/env bash
 wanInterface="eth0"
@@ -97,15 +98,15 @@ iptables -t nat -A POSTROUTING -o ${wanInterface} -j MASQUERADE -w
 iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT -w
 iptables -A FORWARD -i ${lanInterface} -o ${wanInterface} -j ACCEPT -w
 ```
-Make /opt/scripts/router.sh executable:
-
+Make `/opt/scripts/router.sh` executable:
+```
 sudo chmod +x /opt/scripts/router.sh
-
+```
 Systemd Service:
 
 To ensure the iptables rules are loaded at boot, a systemd service can be used to execute the script.
 
-Create /etc/systemd/system/router.service with the following content:
+Create `/etc/systemd/system/router.service` with the following content:
 ```
 [Unit]
 Description=Run router masquerading script
