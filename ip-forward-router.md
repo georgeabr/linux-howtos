@@ -1,7 +1,8 @@
-from https://the-empire.systems/posts/2020-03-06-Arch-Linux-Router/
+From https://the-empire.systems/arch-linux-router/  
 
 Use Arch Linux as a Router  
-This article will walk through setting up Arch Linux as a simple router. Throughout the article we will refer to the following interfaces:
+This article will walk through setting up Arch Linux as a simple router.  
+Throughout the article we will refer to the following interfaces:
 ```
 eth0: WAN interface
 
