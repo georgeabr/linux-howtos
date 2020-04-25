@@ -33,14 +33,14 @@ Set Up a DHCP Server For The LAN:
 Most of the DHCP server setup is derived from the awesome Arch Wiki so feel free to check out the documentation there for more information.
 
 Install the dhcp package using pacman:
-
+```
 sudo pacman -Sy dhcp --noconfirm
-
+```
 Rename the default dhcpd file (which contains a bunch of examples):
-
+```
 sudo mv /etc/dhcpd.conf{,.bak}
-
-Create a new /etc/dhcpd.conf with the following content:
+```
+Create a new `/etc/dhcpd.conf` with the following content:
 
 ```
 option domain-name-servers 1.1.1.1, 1.0.0.1;
@@ -50,7 +50,7 @@ subnet 10.10.10.0 netmask 255.255.255.0 {
   range 10.10.10.10 10.10.10.250;
 }
 ```
-Create a new service file called /etc/systemd/system/dhcpd4@.service with the following content:
+Create a new service file called `/etc/systemd/system/dhcpd4@.service` with the following content:
 ```
 [Unit]
 Description=IPv4 DHCP server on %I
@@ -66,15 +66,15 @@ KillSignal=SIGINT
 [Install]
 WantedBy=multi-user.target
 ```
-Enable the network-online systemd service:
-
+Enable the `network-online` systemd service:
+```
 sudo systemctl enable systemd-networkd-wait-online.service
-
+```
 Now, start and enable the DHCP service on the LAN interface:
 ```
 sudo systemctl enable --now dhcpd4@eth1.service
 ```
-With that done, any device that connects to that LAN port on your Arch device should get an IP via DHCP in the range of 10.10.10.10-10.10.10.250.
+With that done, any device that connects to that LAN port on your Arch device should get an IP via DHCP in the range of `10.10.10.10-10.10.10.250`.
 
 However, none of those devices will have internet access until you set up masquerading through iptables.
 Masquerading:
