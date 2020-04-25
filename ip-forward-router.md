@@ -75,7 +75,7 @@ Now, start and enable the DHCP service on the LAN interface:
 ```
 sudo systemctl enable --now dhcpd4@eth1.service
 ```
-With that done, any device that connects to that LAN port on your Arch device should get an IP via DHCP in the range of `10.10.10.10-10.10.10.250`.
+With that done, any device that connects to that LAN port on your Arch device should get an IP via DHCP in the range of ```10.10.10.10 - 10.10.10.250```
 
 However, none of those devices will have internet access until you set up masquerading through iptables.
 Masquerading:
