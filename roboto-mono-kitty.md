@@ -13,3 +13,6 @@ Add these lines to `~/.config/fontconfig/fonts.conf`:
 ```
 Update the font cache:  
 `fc-cache -r`
+
+Or use
+https://github.com/haasosaurus/nerd-fonts/blob/regen-mono-font-fix/patched-fonts/RobotoMono/Regular/complete/Roboto%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
