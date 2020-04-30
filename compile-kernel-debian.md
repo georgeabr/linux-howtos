@@ -10,8 +10,8 @@ for example (copy `/boot/config-5.5.0-2-amd64` to `/usr/src/linux-5.6.8/.config`
 7. Run the below if you get `error 2` when compiling. `CONFIG_SYSTEM_TRUSTED_KEYS` should be blank:  
 `sed -ri '/CONFIG_SYSTEM_TRUSTED_KEYS/s/=.+/=""/g' .config`
 8. Run `sudo make-kpkg kernel_headers`, to generate `kernel headers`.
-9. Run `sudo make-kpkg kernel_image` to generate `kernel image`. Resulting `.deb` packages are in `/usr/src`.
-10. Install the resulting 2 packages with `dpkg -i`.
+9. Run `sudo make-kpkg kernel_image` to generate `kernel image`.
+10. The resulting 2 `.deb` packages are in `/usr/src`. Install them with `dpkg -i`.
 11. Run the below commands:  
 ```
 sudo dpkg-reconfigure zfs-dkms
