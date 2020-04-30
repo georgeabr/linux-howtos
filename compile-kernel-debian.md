@@ -1,7 +1,7 @@
 ## How to compile a vanilla kernel on Debian (with ZFS)
 
 1. Download latest kernel from https://kernel.org.
-2. Then untar the downloaded kernel to `/usr/src`.
+2. Then untar `tar xf kernel.tar.xz` the downloaded kernel to `/usr/src`.
 3. Install the debian packages `kernel-package`, `rsync`.
 4. Add the line `"CONCURRENCY_LEVEL=9"` to file `/etc/kernel-pkg.conf`. It will use more threads to compile the kernel.
 5. Copy a reference `.config` file from existing kernel;  
