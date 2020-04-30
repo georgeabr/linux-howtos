@@ -9,6 +9,12 @@
 8. Run `sudo make-kpkg kernel_headers`, to generate `kernel headers`.
 9. Run `sudo make-kpkg kernel_image` to generate `kernel image`.
 10. Install the resulting 2 packages with `dpkg -i`.
-
+11. Run the below commands:
+```
+sudo dpkg-reconfigure zfs-dkms
+sudo update-initramfs -u -k all
+sudo update-grub
+systemctl enable zfs-import-bpool.service
+```
 You can also consult this link for more information:  
 <https://wiki.debian.org/BuildADebianKernelPackage>
