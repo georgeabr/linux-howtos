@@ -9,7 +9,8 @@ for example (copy `/boot/config-5.5.0-2-amd64` to `/usr/src/linux-5.6.8/.config`
 6. Run `sudo menuconfig` from the new kernel folder. Change settings according to your cpu, hardware.
 7. Run the below if you get `error 2` when compiling. `CONFIG_SYSTEM_TRUSTED_KEYS` should be blank:  
 `sed -ri '/CONFIG_SYSTEM_TRUSTED_KEYS/s/=.+/=""/g' .config`
-8. Run `sudo make-kpkg kernel_headers`, to generate `kernel headers`.
+8. Run `sudo make-kpkg kernel_headers kernel_image`.  
+Can try this, generates ramdisk also: `sudo make-kpkg --initrd kernel_image kernel_headers`
 9. Run `sudo make-kpkg kernel_image` to generate `kernel image`.
 10. The resulting 2 `.deb` packages are in `/usr/src`. Install them with `dpkg -i`.
 11. Run the below commands:  
@@ -19,5 +20,6 @@ sudo update-initramfs -u -k all
 sudo update-grub
 systemctl enable zfs-import-bpool.service
 ```
-You can also consult this link for more information:  
-<https://wiki.debian.org/BuildADebianKernelPackage>
+You can also consult these links for more information:  
+<https://wiki.debian.org/BuildADebianKernelPackage>  
+https://itbusters.wordpress.com/2013/02/07/how-to-build-debian-kernel-using-multiple-cores/
