@@ -7,7 +7,8 @@
 7. Run the below if you get `error 2`. `CONFIG_SYSTEM_TRUSTED_KEYS` should be blank:  
 `sed -ri '/CONFIG_SYSTEM_TRUSTED_KEYS/s/=.+/=""/g' .config`
 8. Run `sudo make-kpkg kernel_headers`, to generate `kernel headers`.
-7. Run `sudo make-kpkg kernel_image` to generate `kernel image`.
+9. Run `sudo make-kpkg kernel_image` to generate `kernel image`.
+a. Install the resulting 2 packages with `dpkg -i`.
 
 You can also consult this link for more information:  
 <https://wiki.debian.org/BuildADebianKernelPackage>
