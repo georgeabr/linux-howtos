@@ -12,9 +12,8 @@ for example (copy `/boot/config-5.5.0-2-amd64` to `/usr/src/linux-5.6.8/.config`
 8. Run `sudo make-kpkg kernel_headers kernel_image`.  
 Can try this, generates initial ramdisk also, and uses 9 tasks to build:  
 `sudo make-kpkg -j9 --initrd kernel_image kernel_headers`
-9. Run `sudo make-kpkg kernel_image` to generate `kernel image`.
-10. The resulting 2 `.deb` packages are in `/usr/src`. Install them with `dpkg -i`.
-11. Run the below commands:  
+9. The resulting 2 `.deb` packages are in `/usr/src`. Install them with `dpkg -i`.
+10. Run the below commands:  
 ```
 sudo dpkg-reconfigure zfs-dkms
 sudo update-initramfs -u -k all
