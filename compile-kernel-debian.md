@@ -1,4 +1,4 @@
-1. Download latest kernel from kernel.org
+1. Download latest kernel from https://kernel.org.
 2. untar the downloaded kernel to `/usr/src`.
 3. Install the debian packages `kernel-package`, `rsync`.
 4. Add the line `"CONCURRENCY_LEVEL=9"` to file `/etc/kernel-pkg.conf`. It will use more threads to compile the kernel.
