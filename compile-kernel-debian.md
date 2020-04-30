@@ -7,3 +7,6 @@
 6. Run the below if you get `error 2`. `CONFIG_SYSTEM_TRUSTED_KEYS` should be blank:  
 `sed -ri '/CONFIG_SYSTEM_TRUSTED_KEYS/s/=.+/=""/g' .config`
 7. Run `sudo make-kpkg kernel_image`.
+
+You can also consult this link for more information:  
+<https://wiki.debian.org/BuildADebianKernelPackage>
