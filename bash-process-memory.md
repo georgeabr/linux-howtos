@@ -1,6 +1,6 @@
 Run the below to show memory usage in megabytes for top 15 processes:
 ```
-ps -axco size,pid,user,command | awk '{ hr=$1/1024 ; printf("%13.0f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' | sort -nr|head -n 15
+ps -axco size,pid,user,command | awk '{ hr=$1/1024 ; printf("%13.0f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' | sort -nr | head -n 15
 ```
 
 Output will be:  
