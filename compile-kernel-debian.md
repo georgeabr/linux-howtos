@@ -11,7 +11,7 @@ for example (copy `/boot/config-5.5.0-2-amd64` to `/usr/src/linux-5.6.8/.config`
 `sed -ri '/CONFIG_SYSTEM_TRUSTED_KEYS/s/=.+/=""/g' .config`
 8. Run `sudo make-kpkg kernel_headers kernel_image`.  
 Can try this, generates initial ramdisk also, and uses 9 tasks to build:  
-`sudo make-kpkg -j9 --initrd kernel_image kernel_headers`
+`sudo make-kpkg -j$(( $(nproc) + 1 )) --initrd kernel_image kernel_headers`
 9. The resulting 2 `.deb` packages are in `/usr/src`. Install them with `dpkg -i`.
 10. Run the below commands:  
 ```
