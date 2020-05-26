@@ -173,7 +173,7 @@ mount | grep -v zfs | tac | awk '/\/mnt/ {print $3}' | xargs -i{} umount -lf {}
 reboot
 
 
-# fucking part 2
+# hardcore part 2
 
 zfs create rpool/home/george
 adduser george
