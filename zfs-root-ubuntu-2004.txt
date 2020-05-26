@@ -1,0 +1,192 @@
+DISK=/dev/disk/by-id/ata-INTEL_SSDSCKJW240H6_CVTQ5480034U240B
+
+/dev/sda10 413648896 414697471   1048576  512M Solaris /usr & Apple ZFS
+/dev/sda11 414697472 468862094  54164623 25.8G Solaris /usr & Apple ZFS
+
+# boot pool
+zpool create -o ashift=12 -d \
+    -o feature@async_destroy=enabled \
+    -o feature@bookmarks=enabled \
+    -o feature@embedded_data=enabled \
+    -o feature@empty_bpobj=enabled \
+    -o feature@enabled_txg=enabled \
+    -o feature@extensible_dataset=enabled \
+    -o feature@filesystem_limits=enabled \
+    -o feature@hole_birth=enabled \
+    -o feature@large_blocks=enabled \
+    -o feature@lz4_compress=enabled \
+    -o feature@spacemap_histogram=enabled \
+    -o feature@userobj_accounting=enabled \
+    -O acltype=posixacl -O canmount=off -O compression=lz4 -O devices=off \
+    -O normalization=formD -O relatime=on -O xattr=sa \
+    -O mountpoint=/ -R /mnt bpool ${DISK}-part10
+    
+# root pool
+zpool create -o ashift=12 \
+    -O acltype=posixacl -O canmount=off -O compression=lz4 \
+    -O dnodesize=auto -O normalization=formD -O relatime=on -O xattr=sa \
+    -O mountpoint=/ -R /mnt rpool ${DISK}-part11
+    
+zfs create -o canmount=off -o mountpoint=none rpool/ROOT
+zfs create -o canmount=off -o mountpoint=none bpool/BOOT
+
+zfs create -o canmount=noauto -o mountpoint=/ rpool/ROOT/ubuntu
+zfs mount rpool/ROOT/ubuntu
+
+zfs create -o canmount=noauto -o mountpoint=/boot bpool/BOOT/ubuntu
+zfs mount bpool/BOOT/ubuntu
+
+# create datasets
+zfs create                                 rpool/home
+zfs create -o mountpoint=/root             rpool/home/root
+zfs create -o canmount=off                 rpool/var
+zfs create -o canmount=off                 rpool/var/lib
+zfs create                                 rpool/var/log
+zfs create                                 rpool/var/spool
+zfs create                                 rpool/opt
+zfs create -o canmount=off                 rpool/usr
+zfs create                                 rpool/usr/local
+zfs create                                 rpool/var/mail
+zfs create                                 rpool/var/snap
+zfs create                                 rpool/var/lib/AccountsService
+
+# bootstrap minimal system
+debootstrap focal /mnt
+zfs set devices=off rpool
+
+echo uzfs > /mnt/etc/hostname
+nano /mnt/etc/hosts
+
+# configure networking
+# get interface name first, for dhcp
+ip addr show
+nano /mnt/etc/netplan/01-netcfg.yaml
+
+# replace NAME with interface name
+network:
+  version: 2
+  ethernets:
+    NAME:
+      dhcp4: true
+      
+nano /mnt/etc/apt/sources.list
+# add the below lines
+deb http://archive.ubuntu.com/ubuntu focal main universe
+deb-src http://archive.ubuntu.com/ubuntu focal main universe
+
+deb http://security.ubuntu.com/ubuntu focal-security main universe
+deb-src http://security.ubuntu.com/ubuntu focal-security main universe
+
+deb http://archive.ubuntu.com/ubuntu focal-updates main universe
+deb-src http://archive.ubuntu.com/ubuntu focal-updates main universe
+
+# chroot into new system
+mount --rbind /dev  /mnt/dev
+mount --rbind /proc /mnt/proc
+mount --rbind /sys  /mnt/sys
+chroot /mnt /usr/bin/env DISK=$DISK bash --login
+
+# delete first, if exists
+ln -s /proc/self/mounts /etc/mtab
+apt update
+
+# also add en_US.UTF-8
+dpkg-reconfigure locales
+dpkg-reconfigure tzdata
+apt install --yes nano
+
+# install kernel and zfs, will take a while
+apt install --yes --no-install-recommends linux-image-generic
+apt install --yes zfs-initramfs
+
+# install GRUB for UEFI
+# see which partition is EFI with "fdisk -l":
+# /dev/sda8  268615680 268820479    204800  100M EFI System
+
+apt install dosfstools
+mkdir /boot/efi
+echo PARTUUID=$(blkid -s PARTUUID -o value ${DISK}-part8) \
+    /boot/efi vfat nofail,x-systemd.device-timeout=1 0 1 >> /etc/fstab
+apt install --yes grub-efi-amd64-signed shim-signed
+
+# set root password
+passwd
+
+# enable importing bpool
+nano /etc/systemd/system/zfs-import-bpool.service
+[Unit]
+DefaultDependencies=no
+Before=zfs-import-scan.service
+Before=zfs-import-cache.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/zpool import -N -o cachefile=none bpool
+
+[Install]
+WantedBy=zfs-import.target
+
+# run this after creating the unit file above
+systemctl enable zfs-import-bpool.service
+
+# mount a tmpfs to /tmp
+cp /usr/share/systemd/tmp.mount /etc/systemd/system/
+systemctl enable tmp.mount
+
+# add admin groups
+addgroup --system lpadmin
+addgroup --system sambashare
+
+# rebuild kernel initrd files, run both commands
+update-initramfs -u -k all
+update-initramfs -c -k all
+
+nano /etc/default/grub
+# add this line
+GRUB_CMDLINE_LINUX="root=ZFS=rpool/ROOT/ubuntu"
+
+update-grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi \
+    --bootloader-id=ubuntu --recheck --no-floppy
+
+# verify presence of zfs module in grub
+ls /boot/grub/*/zfs.mod
+
+# unmount, hardcore follows
+umount /boot/efi
+zfs set mountpoint=legacy bpool/BOOT/ubuntu
+echo bpool/BOOT/ubuntu /boot zfs \
+    nodev,relatime,x-systemd.requires=zfs-import-bpool.service 0 0 >> /etc/fstab
+zfs set mountpoint=legacy rpool/var/log
+echo rpool/var/log /var/log zfs nodev,relatime 0 0 >> /etc/fstab
+zfs set mountpoint=legacy rpool/var/spool
+echo rpool/var/spool /var/spool zfs nodev,relatime 0 0 >> /etc/fstab
+
+# for /tmp dataset
+zfs set mountpoint=legacy rpool/tmp
+echo rpool/tmp /tmp zfs nodev,relatime 0 0 >> /etc/fstab
+
+# end this
+exit
+mount | grep -v zfs | tac | awk '/\/mnt/ {print $3}' | xargs -i{} umount -lf {}
+reboot
+
+
+# fucking part 2
+
+zfs create rpool/home/george
+adduser george
+cp -a /etc/skel/. /home/george
+chown -R george:george /home/george
+
+usermod -a -G adm,cdrom,dip,lpadmin,plugdev,sambashare,sudo george
+
+apt dist-upgrade --yes
+apt install --yes ubuntu-desktop
+
+# manage network with NetworkManager
+nano /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: NetworkManager
