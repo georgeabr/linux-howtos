@@ -47,3 +47,16 @@ https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog
 https://micheleg.github.io/dash-to-dock/
 6. **Clock override** - change top bar clock date/time format  
 https://github.com/stuartlangridge/gnome-shell-clock-override
+
+For **Remove Audio Device Selection Dialog**, do the below to make it remember the headphones:
+```
+    sudo nano /etc/pulse/default.pa
+```
+Find and comment out the following line (#):
+```
+    load-module module-switch-on-port-available
+```
+Now restart PulseAudio
+```
+    pulseaudio -k
+```
