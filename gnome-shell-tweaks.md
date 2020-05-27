@@ -43,6 +43,19 @@ https://github.com/hardpixel/unite-shell
 https://github.com/gTile
 4. **Remove Audio Device Selection Dialog**  
 https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
+For **Remove Audio Device Selection Dialog**, do the below to make it remember the headphones:
+```
+    sudo nano /etc/pulse/default.pa
+```
+Find and comment out the following line (#):
+```
+    load-module module-switch-on-port-available
+```
+Now restart PulseAudio
+```
+    pulseaudio -k
+```
+
 5. **Dash to dock**  
 https://micheleg.github.io/dash-to-dock/
 6. **Clock override** - change top bar clock date/time format  
@@ -59,18 +72,6 @@ gedit ~/.local/share/gnome-shell/extensions/simple-task-bar\@fthx/extension.js
                 box.icon.add_effect(iconEffect);
 ```
 
-For **Remove Audio Device Selection Dialog**, do the below to make it remember the headphones:
-```
-    sudo nano /etc/pulse/default.pa
-```
-Find and comment out the following line (#):
-```
-    load-module module-switch-on-port-available
-```
-Now restart PulseAudio
-```
-    pulseaudio -k
-```
 ## Change Gnome shell's top bar font, colour
 To change the colour or font of the Gnome shell top bar, run the below:
 ```
