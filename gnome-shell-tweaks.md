@@ -68,7 +68,7 @@ gedit ~/.local/share/gnome-shell/extensions/simple-task-bar\@fthx/extension.js
 ```
 ```
 	        let iconEffect = new Clutter.DesaturateEffect();
-                box.add_effect(iconEffect);
+                // box.add_effect(iconEffect);
                 box.icon.add_effect(iconEffect);
 ```
 
