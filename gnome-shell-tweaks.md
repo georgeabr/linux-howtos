@@ -60,13 +60,14 @@ Now restart PulseAudio
 ```
     pulseaudio -k
 ```
-
+## Change Gnome shell's top bar font, colour
 To change the colour or font of the Gnome shell top bar, run the below:
 ```
 mkdir -p ~/.local/share/themes/custom/gnome-shell/
 nano ~/.local/share/themes/custom/gnome-shell/gnome-shell.css
 ```
 
+Add the following text to the file, customise as needed:
 ```
 @import url("resource:///org/gnome/theme/gnome-shell.css");
 
