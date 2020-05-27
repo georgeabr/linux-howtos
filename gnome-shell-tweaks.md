@@ -42,7 +42,7 @@ https://github.com/hardpixel/unite-shell
 3. **Gtile** - A window tiling extension for Gnome  
 https://github.com/gTile
 4. **Remove Audio Device Selection Dialog**  
-https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/
+https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog/  
 For **Remove Audio Device Selection Dialog**, do the below to make it remember the headphones:
 ```
     sudo nano /etc/pulse/default.pa
