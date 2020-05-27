@@ -47,9 +47,12 @@ https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog
 https://micheleg.github.io/dash-to-dock/
 6. **Clock override** - change top bar clock date/time format  
 https://github.com/stuartlangridge/gnome-shell-clock-override
-7. **Simple task bar**
+7. **Simple task bar** - icons of running applications on Gnome shell's top bar  
 https://github.com/fthx/simple-task-bar  
-To make the icons grayscale, edit the file `extension.js`, located in `~/.local/share/gnome-shell/extensions/simple-task-bar@fthx`:
+To make the icons grayscale, edit the file `extension.js`, in the `for` loop below this comment `// create all normal windows icons and buttons`:
+```
+gedit ~/.local/share/gnome-shell/extensions/simple-task-bar\@fthx/extension.js
+```
 ```
 	        let iconEffect = new Clutter.DesaturateEffect();
                 box.add_effect(iconEffect);
