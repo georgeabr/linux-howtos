@@ -47,6 +47,14 @@ https://extensions.gnome.org/extension/1482/remove-audio-device-selection-dialog
 https://micheleg.github.io/dash-to-dock/
 6. **Clock override** - change top bar clock date/time format  
 https://github.com/stuartlangridge/gnome-shell-clock-override
+7. **Simple task bar**
+https://github.com/fthx/simple-task-bar
+To make the icons grayscale, edit the file `extension.js`, located in `~/.local/share/gnome-shell/extensions/simple-task-bar@fthx`:
+```
+	            let iconEffect = new Clutter.DesaturateEffect();
+                box.add_effect(iconEffect);
+                box.icon.add_effect(iconEffect);
+```
 
 For **Remove Audio Device Selection Dialog**, do the below to make it remember the headphones:
 ```
