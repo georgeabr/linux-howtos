@@ -58,9 +58,11 @@ Now restart PulseAudio
 
 5. **Dash to dock**  
 https://micheleg.github.io/dash-to-dock/
-6. **Clock override** - change top bar clock date/time format  
+6. **Disable workspace switch notification**  
+https://extensions.gnome.org/extension/959/disable-workspace-switcher-popup/
+7. **Clock override** - change top bar clock date/time format  
 https://github.com/stuartlangridge/gnome-shell-clock-override
-7. **Simple task bar** - icons of running applications on Gnome shell's top bar  
+8. **Simple task bar** - icons of running applications on Gnome shell's top bar  
 https://github.com/fthx/simple-task-bar  
 To make the icons grayscale, edit the file `extension.js`, in the `for` loop below this comment `// create all normal windows icons and buttons`:
 ```
