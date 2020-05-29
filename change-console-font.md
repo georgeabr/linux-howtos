@@ -1,7 +1,7 @@
 Edit the settings, `nano /etc/default/console-setup` file.  
 
-See below:
-https://askubuntu.com/questions/1244778/increasing-the-console-font-size
+Debian man page for `console-setup`:  
+https://manpages.debian.org/testing/console-setup/console-setup.5.en.html
 ```
 # Consult the console-setup(5) manual page.
 
