@@ -138,8 +138,7 @@ systemctl enable tmp.mount
 addgroup --system lpadmin
 addgroup --system sambashare
 
-# rebuild kernel initrd files, run both commands
-update-initramfs -u -k all
+# rebuild kernel initrd files
 update-initramfs -c -k all
 
 nano /etc/default/grub
