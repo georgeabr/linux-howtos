@@ -20,9 +20,9 @@ Possible values:
 ```
   FONTFACE and FONTSIZE
           Valid font faces are: 
-          VGA (sizes 8x8, 8x14, 8x16, 16x28 and 16x32),  
-          Terminus (sizes 6x12, 8x14, 8x16, 10x20, 12x24, 14x28 and 16x32), 
-          TerminusBold (sizes 8x14, 8x16, 10x20, 12x24, 14x28 and 16x32),  
-          TerminusBoldVGA (sizes 8x14 and 8x16), 
-          Fixed (sizes 8x13, 8x14, 8x15, 8x16 and 8x18).    
+          VGA               (sizes 8x8, 8x14, 8x16, 16x28 and 16x32),  
+          Terminus          (sizes 6x12, 8x14, 8x16, 10x20, 12x24, 14x28 and 16x32), 
+          TerminusBold      (sizes 8x14, 8x16, 10x20, 12x24, 14x28 and 16x32),  
+          TerminusBoldVGA   (sizes 8x14 and 8x16), 
+          Fixed             (sizes 8x13, 8x14, 8x15, 8x16 and 8x18).    
  ```
