@@ -5,4 +5,8 @@ https://input.fontbureau.com/
 https://www.fontsquirrel.com/fonts/cousine
 
 ### Chromium .deb Ubuntu
-https://launchpad.net/~chromium-team/+archive/ubuntu/beta/+packages
+https://launchpad.net/~chromium-team/+archive/ubuntu/beta/+packages  
+Use  
+chromium-browser_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (64.7 MiB)  
+chromium-codecs-ffmpeg-extra_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (1.1 MiB)  
+chromium-codecs-ffmpeg_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (861.1 KiB)  
