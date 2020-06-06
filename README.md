@@ -10,3 +10,6 @@ Use
 chromium-browser_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (64.7 MiB)  
 chromium-codecs-ffmpeg-extra_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (1.1 MiB)  
 chromium-codecs-ffmpeg_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (861.1 KiB)  
+
+### Youtube volume normalisation - requires Tampermonkey browser extension
+https://gist.github.com/abec2304/2782f4fc47f9d010dfaab00f25e69c8a
