@@ -13,3 +13,6 @@ chromium-codecs-ffmpeg_84.0.4147.38-0ubuntu0.18.04.1_amd64.deb (861.1 KiB)
 
 ### Youtube volume normalisation - requires Tampermonkey browser extension
 https://gist.github.com/abec2304/2782f4fc47f9d010dfaab00f25e69c8a
+
+### Prefer external audio device on connect - Pulseaudio
+https://askubuntu.com/questions/113704/make-pulseaudio-prefer-external-audio-device
