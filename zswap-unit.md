@@ -46,3 +46,4 @@ journalctl -f zswap
 6. See status of unit:
 `
 sudo systemctl status zswap.service
+`
