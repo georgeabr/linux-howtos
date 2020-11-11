@@ -1,3 +1,4 @@
+## How to use `zswap` with a systemd unit
 1. Create a systemd unit:  
 `
 sudo nano /etc/systemd/system/zswap.service
