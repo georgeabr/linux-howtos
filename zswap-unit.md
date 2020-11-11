@@ -33,17 +33,17 @@ WantedBy=multi-user.target
 sudo systemctl enable zswap.service
 `
 
-4. Start the systemd unit:
+4. Start the systemd unit:  
 `
 sudo systemctl enable zswap.service
 `
 
-5. See log files for the unit:
+5. See log files for the unit:  
 `
 journalctl -f zswap
 `
 
-6. See status of unit:
+6. See status of unit:  
 `
 sudo systemctl status zswap.service
 `
