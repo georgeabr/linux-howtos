@@ -41,7 +41,7 @@ sudo systemctl start zswap.service
 
 5. See log files for the unit:  
 `
-journalctl -f zswap
+sudo journalctl -f zswap
 `
 
 6. See status of unit:  
