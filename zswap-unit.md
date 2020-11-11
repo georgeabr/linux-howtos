@@ -47,3 +47,8 @@ journalctl -f zswap
 `
 sudo systemctl status zswap.service
 `
+
+7. To see the `zswap` parameters at runtime:  
+`
+grep -R . /sys/module/zswap/parameters
+`
