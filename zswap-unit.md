@@ -53,3 +53,5 @@ sudo systemctl status zswap.service
 `
 grep -R . /sys/module/zswap/parameters
 `
+
+8. If you modify the unit's content, disable and enable it to apply the changes.
