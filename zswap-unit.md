@@ -36,7 +36,7 @@ sudo systemctl enable zswap.service
 
 4. Start the systemd unit:  
 `
-sudo systemctl enable zswap.service
+sudo systemctl start zswap.service
 `
 
 5. See log files for the unit:  
