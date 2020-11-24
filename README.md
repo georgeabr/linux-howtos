@@ -16,3 +16,6 @@ https://gist.github.com/abec2304/2782f4fc47f9d010dfaab00f25e69c8a
 
 ### Prefer external audio device on connect - Pulseaudio
 https://askubuntu.com/questions/113704/make-pulseaudio-prefer-external-audio-device
+
+### Good cursor theme - white or black
+https://gitlab.com/Enthymeme/hackneyed-x11-cursors
