@@ -17,9 +17,9 @@ Use `intel_gpu_top`, check `Video/0` field, it should display 8-10% utilisation.
 
           ENGINE      BUSY           MI_SEMA MI_WAIT
        Render/3D/0    11.15% |    |      0%      0%
-       Blitter/0       0.00% |    |      0%      0%
-         <b>Video/0      11.00%</b> |    |      0%      0%
-  VideoEnhance/0     0.00% |      
+         Blitter/0     0.00% |    |      0%      0%
+           <b>Video/0    11.00%</b> |    |      0%      0%
+    VideoEnhance/0     0.00% |    |      0%      0%      
   </pre></code>
 
 More info:
