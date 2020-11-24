@@ -13,12 +13,12 @@ Run `MOZ_X11_EGL=1 firefox`.
 
 Run this to debug: `MOZ_X11_EGL=1 MOZ_LOG="PlatformDecoderModule:5" firefox` 2>&1  
 Use `intel_gpu_top`, check `Video/0` field, it should display 8-10% utilisation.  
-<pre><code>     IMC writes:       72 MiB/s
+<pre><code>
 
-          ENGINE      BUSY                                                                                                                                                   MI_SEMA MI_WAIT
-     Render/3D/0    11.15% |    |      0%      0%
-       Blitter/0     0.00% |    |      0%      0%
-         **Video/0    11.00%** |    |      0%      0%
+          ENGINE      BUSY           MI_SEMA MI_WAIT
+       Render/3D/0    11.15% |    |      0%      0%
+       Blitter/0       0.00% |    |      0%      0%
+         <b>Video/0      11.00%</b> |    |      0%      0%
   VideoEnhance/0     0.00% |      
   </pre></code>
 
