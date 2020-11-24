@@ -21,7 +21,6 @@ Use `intel_gpu_top`, check `Video/0` field, it should display 8-10% utilisation.
     VideoEnhance/0     0.00% |    |      0%      0%      
   </pre></code>
 
-More info:
-```
-https://bugzilla.mozilla.org/show_bug.cgi?id=1619523
-```
+More info:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[mastransky.wordpress.com!](https://mastransky.wordpress.com/2020/09/29/firefox-81-on-fedora-with-va-api-webrtc-and-x11/)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[bugzilla.mozilla.org!](https://bugzilla.mozilla.org/show_bug.cgi?id=1619523)  
