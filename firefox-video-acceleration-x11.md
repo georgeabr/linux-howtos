@@ -22,5 +22,5 @@ Use `intel_gpu_top`, check `Video/0` field, it should display 8-10% utilisation.
   </pre></code>
 
 More info:  
-- [mastransky.wordpress.com!](https://mastransky.wordpress.com/2020/09/29/firefox-81-on-fedora-with-va-api-webrtc-and-x11/)  
-- [bugzilla.mozilla.org!](https://bugzilla.mozilla.org/show_bug.cgi?id=1619523)  
+- [mastransky.wordpress.com](https://mastransky.wordpress.com/2020/09/29/firefox-81-on-fedora-with-va-api-webrtc-and-x11/)  
+- [bugzilla.mozilla.org](https://bugzilla.mozilla.org/show_bug.cgi?id=1619523)  
