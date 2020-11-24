@@ -20,7 +20,7 @@ Use `intel_gpu_top`, check `Video/0` field, it should display 8-10% utilisation.
        Blitter/0     0.00% |    |      0%      0%
          **Video/0    11.00%** |    |      0%      0%
   VideoEnhance/0     0.00% |      
-  <pre><code>
+  </pre></code>
 
 More info:
 ```
