@@ -30,6 +30,29 @@ drwxr-xr-x 1 george george      818 Dec 24 22:21  test
 -rw-r--r-- 1 george george  5840060 Dec 24 21:34 '02.Orphée_aux_enfers__Acte_deuxième._Dialogue_Salut_au_puissant_maître_des_dieux..._(Mercure,_Jupiter,_Junon).wav'
 -rw-r--r-- 1 george george 24390284 Dec 24 21:34 '01.Orphée_aux_enfers__Acte_deuxième._Rondo_saltarelle_de_Mercure_Eh_hop!_Eh_hop!_(Mercure,_Junon,_Jupiter).wav'
 ```
-
+In this case, files named `file-001.wav` are located in the current folder, and files named `01.Orphée_aux_enfers.wav` are located in the parent folder (`..`).  
+We would generate two file listings, containing only file sizes, for the two folders we'd like to compare.  
+```
+ls -lt *.wav | grep -P \^\.\*file\.\*\$ | cut -d" " -f5|sed 's/^ *//; s/ *$//; /^$/d; /^\s*$/d' > diff-file.txt
 ls -lt *.wav .. | grep -P \^\.\*Orp\.\*\$ | cut -d" " -f5|sed 's/^ *//; s/ *$//; /^$/d; /^\s*$/d' > diff-Orp.txt
+```
+
+To see one of the generated file listings, run the below:  
+```
+[george@archie test]$ cat diff-file.txt 
+30336140
+29823404
+12971324
+54625244
+31293404
+```
+Then, let's compare the generated file listings.
+```
 diff -s diff-file.txt diff-Orp.txt
+```
+
+As an example, the two file listings are identical:  
+```
+[george@archie test]$ diff -s diff-file.txt diff-Orp.txt 
+Files diff-file.txt and diff-Orp.txt are identical
+```
