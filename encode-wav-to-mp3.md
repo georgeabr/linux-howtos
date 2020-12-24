@@ -1,7 +1,10 @@
 # How to encode wave files to mp3, using ffmpeg
 
-1. First, rename all the files in the CD folders to something like `file-01.wav`, `file-02.wav`.  
-For this, you can use `KDE Dolphin` rename, use 2 # - `##` for renaming files.
+1. First, rename all the files in the CD folders to something like `file-0001.wav`, `file-0002.wav`.  
+The below command will rename all `.wav` files to `file-0001.wav`, etc..  
+```
+ls | cat -n | while read n f; do mv "$f" `printf "file-%04d.wav" $n`; done
+```
 
 2. Then, in each CD folder, run tbese commands: they will first concatenate the files into one `output.wav`.  
 The file `output.wav` will then be compressed to `256kbps mp3`.
