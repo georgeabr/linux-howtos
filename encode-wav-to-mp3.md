@@ -1,6 +1,6 @@
 # How to encode wave files to mp3, using ffmpeg
 
-1. First, rename all the files in the CD folders to something like `file-0001.wav`, `file-0002.wav`.  
+1. First, rename all the `.wav` files in the CD folders to something like `file-0001.wav`, `file-0002.wav`.  
 The below command will rename all `.wav` files to `file-0001.wav`, etc..  
 ```
 ls | cat -n | while read n f; do mv "$f" `printf "file-%04d.wav" $n`; done
