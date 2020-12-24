@@ -10,3 +10,4 @@ The file `output.wav` will then be compressed to `256kbps mp3`.
 ffmpeg -f concat -safe 0  -i <( for f in *.wav; do echo "file '$(pwd)/$f'"; done ) output.wav  
 for i in output.wav; do ffmpeg -threads 4 -i "$i" -b:a 256k -f mp3 "${i%.*}.mp3"; done  
 ```
+3. Use a tool like `musicbrainz picard` to add folder art and title to the resulting mp3 files.
