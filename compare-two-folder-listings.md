@@ -36,6 +36,7 @@ drwxr-xr-x 1 george george      818 Dec 24 22:21  test
 In this case, 
 - files named `file-001.wav` are located in the current folder,
 - files named `01.Orphée_aux_enfers.wav` are located in the parent folder (`..`).  
+
 We would generate two file listings, containing only file sizes, for the two folders we'd like to compare.  
 ```
 ls -lt *.wav | grep -P \^\.\*file\.\*\$ | cut -d" " -f5|sed 's/^ *//; s/ *$//; /^$/d; /^\s*$/d' > diff-file.txt
