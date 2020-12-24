@@ -1,7 +1,10 @@
 ## How to compare file sizes of files in two folders, to see if they are identical
 
-In this case, let's compare files named `file-007.wav` and so on, from one folder, with files named `01.Orphée_aux_enfers.wav` from another folder.  
-We want to filter only these files, and not show other files named `output.wav` or other folders.  
+In this case, let's compare the two:
+- files named `file-007.wav` and so on, from one folder, 
+- files named `01.Orphée_aux_enfers.wav` from another folder.    
+
+We want to filter only these files, and not show other files named `output.wav` or other folders.    
 Below is the file listing for the folders we want to compare.  
 
 Folder 1  
