@@ -3,7 +3,7 @@
 1. First, rename all the `.wav` files in the CD folders to something like `file-0001.wav`, `file-0002.wav`.  
 The below command will rename all `.wav` files to `file-0001.wav`, etc..  
 ```
-ls | cat -n | while read n f; do mv "$f" `printf "file-%04d.wav" $n`; done
+ls *.wav | cat -n | while read n f; do mv "$f" `printf "file-%04d.wav" $n`; done
 ```
 
 2. Then, in each CD folder, run these commands: they will first concatenate the files into one `output.wav`.  
