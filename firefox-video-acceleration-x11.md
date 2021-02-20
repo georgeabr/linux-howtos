@@ -2,7 +2,7 @@
 
 #### Install the below in Debian:
 ```
-sudo apt-get install i965-va-driver vainfo
+sudo apt-get install i965-va-driver vainfo ffmpeg
 ```
 #### Set the below in `about:config`:
 
@@ -14,7 +14,6 @@ media.ffmpeg.vaapi.enabled = true
 media.ffvpx.enabled = false
 ```
 
-Install the `ffmpeg` package for your distro.  
 Install `h264ify`or `enhanced-h264ify` Firefox extension.  
 Untick what codecs you would like to use in `enhanced-h264ify` extension.  
 
