@@ -1,5 +1,6 @@
 ### Set the below in `about:config`:
 
+If your CPU supports `AVC1/H264` video acceleration:
 ```
 media.ffvpx.enabled = false
 media.ffmpeg.vaapi.enabled = true
