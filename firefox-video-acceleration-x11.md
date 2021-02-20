@@ -1,4 +1,8 @@
-### Set the below in `about:config`:
+#### Install the below in Debian:
+```
+sudo apt-get install i965-va-driver vainfo
+```
+#### Set the below in `about:config`:
 
 If your CPU supports `AVC1/H264` video acceleration:
 ```
