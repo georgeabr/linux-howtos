@@ -1,4 +1,4 @@
-## How to enable X11 GPU acceleration in Firefox (intel)
+### How to enable X11 GPU acceleration in Firefox (intel)
 
 #### Install the below in Debian:
 ```
@@ -6,14 +6,6 @@ sudo apt-get install i965-va-driver vainfo
 ```
 #### Set the below in `about:config`:
 
-If your CPU supports `AVC1/H264` video acceleration:
-```
-media.ffvpx.enabled = false
-media.ffmpeg.vaapi.enabled = true
-gfx.webrender.all = true
-```
-
-If your CPU supports `VP9` video acceleration:
 ```
 gfx.webrender.all = true
 gfx.webrender.compositor.force-enabled = true
