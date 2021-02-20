@@ -1,4 +1,4 @@
-## How to enable X11 GPU acceleration in Firefox
+## How to enable X11 GPU acceleration in Firefox (intel)
 
 #### Install the below in Debian:
 ```
