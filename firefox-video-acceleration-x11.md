@@ -1,3 +1,5 @@
+## How to enable X11 GPU acceleration in Firefox
+
 #### Install the below in Debian:
 ```
 sudo apt-get install i965-va-driver vainfo
