@@ -34,3 +34,4 @@ Use `intel_gpu_top`, check `Video/0` field, it should display 8-10% utilisation.
 More info:  
 - [mastransky.wordpress.com](https://mastransky.wordpress.com/2020/09/29/firefox-81-on-fedora-with-va-api-webrtc-and-x11/)  
 - [bugzilla.mozilla.org](https://bugzilla.mozilla.org/show_bug.cgi?id=1619523)  
+- https://askubuntu.com/questions/1291279/ubuntu-20-10-firefox-82-intel-hd-500-vaapi-hardware-acceleration
