@@ -22,8 +22,9 @@ media.ffmpeg.vaapi.enabled = true
 media.ffvpx.enabled = false
 ```
 
-Install `h264ify`or `enhanced-h264ify` Firefox extension.  
 Install the `ffmpeg` package for your distro.  
+Install `h264ify`or `enhanced-h264ify` Firefox extension.  
+Untick what codecs you would like to use in `enhanced-h264ify` extension.  
 
 Run `MOZ_X11_EGL=1 firefox`.  
 
