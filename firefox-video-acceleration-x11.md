@@ -6,6 +6,15 @@ media.ffmpeg.vaapi.enabled = true
 gfx.webrender.all = true
 ```
 
+If your CPU supports `VP9` video acceleration:
+```
+gfx.webrender.all = true
+gfx.webrender.compositor.force-enabled = true
+media.ffmpeg.vaapi-drm-display.enabled = true
+media.ffmpeg.vaapi.enabled = true
+media.ffvpx.enabled = false
+```
+
 Install `h264ify`or `enhanced-h264ify` Firefox extension.  
 Install the `ffmpeg` package for your distro.  
 
