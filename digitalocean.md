@@ -36,3 +36,5 @@ Restart daemon:
 ```
 sudo systemctl restart sshd
 ```
+
+More information at [DigitalOcean](https://www.digitalocean.com/community/questions/ssh-copy-id-not-working-permission-denied-publickey).
