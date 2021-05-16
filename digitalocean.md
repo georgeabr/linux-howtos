@@ -1,6 +1,5 @@
-### 
-
-In order to copy a ssh key to a DO account, you need to temporarily enable password login for the `SSH` daemon.   
+### Copy ssh key to droplet
+To copy a ssh key to a DO droplet, you temporarily enable password login for the `sshd` daemon.   
 
 Log in as `root`:  
 Edit ssh config:  
