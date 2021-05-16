@@ -37,4 +37,9 @@ Restart daemon:
 sudo systemctl restart sshd
 ```
 
+To connect to the droplet, with port `5225`:  
+```
+ssh george.abraham@georgetech.co.uk -p 5225
+```
+
 More information at [DigitalOcean](https://www.digitalocean.com/community/questions/ssh-copy-id-not-working-permission-denied-publickey).
