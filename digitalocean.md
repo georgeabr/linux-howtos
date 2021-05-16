@@ -22,7 +22,8 @@ sudo systemctl restart sshd
 ```
 
 Then run the below to copy the generated ssh key to the acount named `test`.  
-You will be prompted for the UNIX  password for user test:  
+Note that ssh port is `5225`.  
+You will be prompted for the UNIX password for user test:  
 ```
 ssh-copy-id -p 5225 -i .ssh/id_rsa.pub test@domain.co.uk
 ```
