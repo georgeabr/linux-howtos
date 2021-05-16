@@ -1,0 +1,37 @@
+### 
+
+In order to copy a ssh key to a DO account, you need to temporarily enable password login for the `SSH` daemon.   
+
+Log in as `root`:  
+Edit ssh config:  
+```
+sudo nano /etc/ssh/sshd_config
+```
+
+Change this line:   
+```
+PasswordAuthentication no
+```
+to
+```
+PasswordAuthentication yes
+```
+Restart daemon:  
+```
+sudo systemctl restart sshd
+```
+
+Then run the below to copy the generated ssh key to the acount named `test`.  
+You will be prompted for the UNIX  password for user test:  
+```
+ssh-copy-id -p 5225 -i .ssh/id_rsa.pub test@domain.co.uk
+```
+
+Then revert the ssh daemon changes by changing the ssh config line to:  
+```
+PasswordAuthentication no
+```
+Restart daemon:  
+```
+sudo systemctl restart sshd
+```
