@@ -1,3 +1,5 @@
+Install `intel-media-driver`.  
+
 ```
 security.sandbox.content.level = 0
 gfx.webrender.all = true
