@@ -18,3 +18,4 @@ media.rdd-vpx.enabled = false
 ```
 MOZ_DISABLE_RDD_SANDBOX=1 MOZ_ENABLE_WAYLAND=1 firefox &
 ```
+https://wiki.archlinux.org/title/Firefox#Hardware_video_acceleration
