@@ -4,3 +4,6 @@ https://github.com/helmuthdu/aui
 
 - a customised ISO file to download  
 https://gitlab.com/anarchyinstaller/installer/-/releases
+
+- Rawleenc / archlinux-install  
+https://github.com/Rawleenc/archlinux-install
