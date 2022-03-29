@@ -9,8 +9,11 @@ Enable in `about:config` the following -`toolkit.legacyUserProfileCustomizations
 /* hide the tab bar at the top, if you have treestyletab */  
 #tabbrowser-tabs { visibility: collapse !important; }
 
-/* hide 'overlink' messages */  
+/* hide 'overlink' messages, disabled it to show tooltips */ 
+/*
 #statuspanel[type="overLink"] {opacity: 0 !important;}  
+*/
+
 /* hide all status messages */  
 #statuspanel {opacity: 0 !important;}  
 ```
