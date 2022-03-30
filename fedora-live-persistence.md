@@ -1,4 +1,4 @@
-Fedora live with persistence (root drive and home folder overlay)  
+Fedora live USB with persistence (root drive and home folder overlay)  
 ```
 git clone https://github.com/livecd-tools/livecd-tools.git
 cd livecd-tools/tools/
