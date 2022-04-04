@@ -1,3 +1,5 @@
+## GCE - connect to VM via ssh on linux
+
 - Generate an ssh key as per below:  
 ```
 ssh-keygen -t rsa -f ~/.ssh/gcloud_instance1 -C george
