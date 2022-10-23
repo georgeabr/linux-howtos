@@ -1,5 +1,9 @@
 # Linux howtos
-See each file for more information.  
+See each file for more information. 
+
+### Compile sway on Ubuntu/Debian
+https://github.com/luispabon/sway-ubuntu/
+
 ### Monospaced fonts  
 https://input.fontbureau.com/  
 https://www.fontsquirrel.com/fonts/cousine
