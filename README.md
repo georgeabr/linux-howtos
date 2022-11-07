@@ -1,6 +1,10 @@
 # Linux howtos
 See each file for more information. 
 
+# Hide the tab list arrow in Firefox
+browser.tabs.firefox-view
+browser.tabs.tabmanager.enabled
+
 ### Compile sway on Ubuntu/Debian
 https://github.com/luispabon/sway-ubuntu/
 
