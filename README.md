@@ -1,7 +1,7 @@
 # Linux howtos
 See each file for more information. 
 
-# Hide the tab list arrow in Firefox
+### Hide the tab list arrow in Firefox
 browser.tabs.firefox-view
 browser.tabs.tabmanager.enabled
 
