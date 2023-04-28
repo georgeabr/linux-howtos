@@ -170,3 +170,91 @@ FTP transaction
  visibility: collapse;
 }
 ```
+
+TreeStyleTab
+```
+/* Better alignment of Favicons when collapsed */
+tab-item[data-level][data-level="1"] tab-item-substance {
+  margin-left: 4px !important;
+}
+tab-item[data-level][data-level="2"] tab-item-substance {
+  margin-left: 8px !important;
+}
+tab-item[data-level][data-level="3"] tab-item-substance {
+  margin-left: 12px !important;
+}
+tab-item[data-level][data-level="4"] tab-item-substance {
+  margin-left: 16px !important;
+}
+tab-item[data-level][data-level="5"] tab-item-substance {
+  margin-left: 20px !important;
+}
+tab-item[data-level][data-level="6"] tab-item-substance {
+  margin-left: 24px !important;
+}
+tab-item[data-level][data-level="7"] tab-item-substance {
+  margin-left: 28px !important;
+}
+tab-item[data-level][data-level="8"] tab-item-substance {
+  margin-left: 32px !important;
+}
+tab-item[data-level][data-level="9"] tab-item-substance {
+  margin-left: 36px !important;
+}
+/* hides the native tabs */
+#TabsToolbar {
+  visibility: collapse;
+}
+
+.tab.loading:not(.collapsed) .throbber::before,
+:root.blocking-throbber #blocking-screen .throbber::before {
+  animation: throbber 1s frames(2) infinite;
+}
+
+.throbber::before {
+  box-shadow: none;
+  border-radius: 0;
+  border-width: 3px
+}
+
+@keyframes throbber {
+  from { transform: translateX(0px) }
+}
+
+.tab {
+  height: 24px;
+background-color: #light-gray;
+}
+
+.tab .twisty {
+  margin-right: -1em;
+  opacity: 0;
+  position: relative;
+  z-index: 10000;
+}
+
+.label {
+font-size: 11px;
+/*font-family: Inconsolata;*/
+font-weight: 600;
+}
+
+.tab:not(:hover) .closebox {
+  display: none;
+}
+
+
+/****/
+:root,
+#background {
+  background: black;
+}
+
+.tab
+{background: light-gray;}  
+
+
+.newtab-button-box {
+display: none;
+}
+```
