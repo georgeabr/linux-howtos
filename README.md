@@ -7,6 +7,23 @@ browser.tabs.tabmanager.enabled
 
 ### Fedora UEFI/bootloader
 https://docs.fedoraproject.org/en-US/quick-docs/bootloading-with-grub2/#setting-default-entry
+```
+# mount -o bind /dev /mnt/dev
+# mount -o bind /proc /mnt/proc
+# mount -o bind /sys /mnt/sys
+# mount -o bind /run /mnt/run
+
+# mount -o bind /sys/firmware/efi/efivars /mnt/sys/firmware/efi/efivars
+# mount /dev/sda1 /mnt/boot/efi
+
+# chroot /mnt/
+
+/]# dnf reinstall shim-* grub2-efi-* grub2-common
+
+/]# grub2-mkconfig -o /boot/grub2/grub.cfg
+
+/]# sync && exit
+```
 
 ### Compile sway on Ubuntu/Debian
 https://github.com/luispabon/sway-ubuntu/
