@@ -8,12 +8,17 @@ browser.tabs.tabmanager.enabled
 ### Fedora UEFI/bootloader
 https://docs.fedoraproject.org/en-US/quick-docs/bootloading-with-grub2/#setting-default-entry
 ```
+# fdisk -l | grep nvm
+# mount root partition
+# mount /dev/sda3 /mnt
+
 # mount -o bind /dev /mnt/dev
 # mount -o bind /proc /mnt/proc
 # mount -o bind /sys /mnt/sys
 # mount -o bind /run /mnt/run
 
 # mount -o bind /sys/firmware/efi/efivars /mnt/sys/firmware/efi/efivars
+# mount EFI partition
 # mount /dev/sda1 /mnt/boot/efi
 
 # chroot /mnt/
