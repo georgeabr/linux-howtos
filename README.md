@@ -5,6 +5,9 @@ See each file for more information.
 browser.tabs.firefox-view  
 browser.tabs.tabmanager.enabled
 
+### Fedora UEFI/bootloader
+https://docs.fedoraproject.org/en-US/quick-docs/bootloading-with-grub2/#setting-default-entry
+
 ### Compile sway on Ubuntu/Debian
 https://github.com/luispabon/sway-ubuntu/
 
