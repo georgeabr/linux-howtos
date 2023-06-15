@@ -33,6 +33,11 @@ https://docs.fedoraproject.org/en-US/quick-docs/bootloading-with-grub2/#setting-
 ### Compile sway on Ubuntu/Debian
 https://github.com/luispabon/sway-ubuntu/
 
+### Screen sharing in sway
+Add in file `~/.config/environment.d/sway.conf`, this entry `XDG_CURRENT_DESKTOP="${XDG_CURRENT_DESKTOP:-sway}"`   
+These executables are needed - `xdg-desktop-portal-wlr`, `xdg-desktop-portal-wlr`.  
+Run this (should not be needed, automatically ran): `/usr/libexec/xdg-desktop-portal -r & /usr/libexec/xdg-desktop-portal-wlr`.   
+
 ### Monospaced fonts  
 https://input.fontbureau.com/  
 https://www.fontsquirrel.com/fonts/cousine
