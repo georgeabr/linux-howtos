@@ -37,7 +37,9 @@ https://github.com/luispabon/sway-ubuntu/
 Add in file `~/.config/environment.d/sway.conf`, this entry `XDG_CURRENT_DESKTOP="${XDG_CURRENT_DESKTOP:-sway}"`   
 These executables are needed - `xdg-desktop-portal`, `xdg-desktop-portal-wlr`.  
 Run this (should not be needed, automatically ran): `/usr/libexec/xdg-desktop-portal -r & /usr/libexec/xdg-desktop-portal-wlr`.   
-Consult on reddit [this link](https://www.reddit.com/r/swaywm/comments/l4e55v/guide_how_to_screenshare_from_chromiumfirefox/).
+Consult on reddit [this link](https://www.reddit.com/r/swaywm/comments/l4e55v/guide_how_to_screenshare_from_chromiumfirefox/).  
+Test with [this webrtc link](https://mozilla.github.io/webrtc-landing/gum_test.html).  
+On Chrome, enable `enable-webrtc-pipewire-capturer` in `chrome://flags`.  
 
 ### Monospaced fonts  
 https://input.fontbureau.com/  
