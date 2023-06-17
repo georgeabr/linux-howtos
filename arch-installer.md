@@ -7,3 +7,9 @@ https://gitlab.com/anarchyinstaller/installer/-/releases
 
 - Rawleenc / archlinux-install  
 https://github.com/Rawleenc/archlinux-install
+
+- Archboot, live ISO  
+https://archboot.com/
+
+- CachyOs, live ISO  
+https://cachyos.org/
