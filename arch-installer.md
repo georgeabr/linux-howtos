@@ -11,5 +11,5 @@ https://github.com/Rawleenc/archlinux-install
 - Archboot, live ISO  
 https://archboot.com/
 
-- CachyOs, live ISO  
+- CachyOS, live ISO, has ZFS  
 https://cachyos.org/
