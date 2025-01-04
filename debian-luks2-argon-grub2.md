@@ -244,3 +244,62 @@ Let's install tools for lvm:
 ```
 apt install --fix-missing lvm2 linux-headers-amd64 linux-image-amd64
 ```
+Let's install tools to compile grub:
+```
+apt install --fix-missing shim-signed shim-helpers-amd64-signed libalpm13t64 sudo git curl libarchive-tools help2man python3 rsync texinfo texinfo-lib ttf-bitstream-vera build-essential dosfstools efibootmgr uuid-runtime efivar mtools os-prober dmeventd libdevmapper-dev libdevmapper-event1.02.1 libdevmapper1.02.1 libfont-freetype-perl python3-freetype libghc-gi-freetype2-dev libghc-gi-freetype2-prof fuse2fs libconfuse2 libfuse2t64 gettext xorriso libisoburn1t64 libisoburn-dev autogen gnulib libfreetype-dev pkg-config m4 libtool automake flex fuse3 libfuse3-dev gawk autoconf-archive rdfind fonts-dejavu lzma lzma-dev liblzma5 liblzma-dev liblz1 liblz-dev unifont acl libzfslinux-dev sbsigntool
+```
+Create keys folder.
+```
+mkdir -vp /etc/keys
+```
+Generate key.
+```
+( umask 0077 && dd if=/dev/urandom bs=1 count=128 of=/etc/keys/root.key conv=excl,fsync )
+```
+Change owner to `root`.
+```
+chown -vR root:root /etc/keys
+```
+Set perms.
+```
+chmod -vR 600 /etc/keys
+```
+Configure `crypttab`.
+```
+echo "debian-cryptlvm UUID=$(blkid -s UUID -o value /dev/sdb2) /etc/keys/root.key luks,discard,key-slot=1" >> /etc/crypttab
+```
+Add the key to `initramfs`.
+```
+echo "KEYFILE_PATTERN=\"/etc/keys/*.key\"" >>/etc/cryptsetup-initramfs/conf-hook
+```
+Yes.
+```
+echo UMASK=0077 >>/etc/initramfs-tools/initramfs.conf
+```
+```
+apt-mark hold grub2 grub-pc grub-efi grub-efi-amd64
+useradd -mG cdrom,floppy,sudo,audio,dip,video,plugdev,netdev -s /usr/bin/bash -c 'George' george
+passwd george
+export PATH="$PATH:/bin/gcc:/sbin/gcc"; export GRUB_CONTRIB=./grub-extras; export GNULIB_SRCDIR=./gnulib; export CFLAGS=${CFLAGS/-fno-plt}
+
+mv /usr/bin/mawk /usr/bin/mawk_bu;ln -s /usr/bin/gawk /usr/bin/mawk
+mkdir -vp /sources && cd sources
+git clone https://git.savannah.gnu.org/git/grub.git
+cd grub
+git clone https://git.savannah.nongnu.org/git/grub-extras.git;git clone https://aur.archlinux.org/grub-improved-luks2-git.git; git clone https://git.savannah.gnu.org/git/gnulib.git
+patch -Np1 -i ./grub-improved-luks2-git/add-GRUB_COLOR_variables.patch; patch -Np1 -i ./grub-improved-luks2-git/detect-archlinux-initramfs.patch
+
+patch -Np1 -i ./grub-improved-luks2-git/argon_1.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_2.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_3.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_4.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_5.patch
+
+patch -Np1 -i ./grub-improved-luks2-git/grub-install_luks2.patch
+
+sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu /usr/share/fonts/truetype/dejavu|g' -i "configure.ac"
+sed 's|GNU/Linux|Linux|' -i "util/grub.d/10_linux.in"
+sed 's| ro | rw |g' -i "util/grub.d/10_linux.in"
+rm -rf ./grub-extras/lua
+
+./bootstrap
+mkdir ./build_x86_64-efi; cd ./build_x86_64-efi
+
+../configure --with-platform=efi --target=x86_64 --prefix="/usr" --sbindir="/usr/bin" --sysconfdir="/etc" --enable-boot-time --enable-cache-stats --enable-device-mapper --enable-grub-mkfont --enable-grub-mount --enable-mm-debug --disable-silent-rules --disable-werror  CPPFLAGS="$CPPFLAGS -O2" --enable-stack-protector --enable-liblzma
+```
