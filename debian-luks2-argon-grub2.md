@@ -37,7 +37,7 @@ sudo apt --fix-broken install
 ```
 Install the bootstrap tools and `gdisk` to partition disk.
 ```
-sudo apt install arch-install-scripts debootstrap gdisk cryptsetup -y
+sudo apt install arch-install-scripts debootstrap gdisk cryptsetup dosfstools -y
 ```
 Use `lsblk` to see your disks, partitions. The `sda` disk is 15GB in size, we will use it to install Debian.
 ```
@@ -148,4 +148,47 @@ sudo lvcreate -L 2G vg1 -n swap
 Create the logical volume for the root partition.
 ```
 sudo lvcreate -l +100%FREE vg1 -n root
+```
+Create the EFI filesystem:
+```
+sudo mkfs.fat -F 32 /dev/sda1
+```
+Create the swap file:
+```
+sudo mkswap -L swap /dev/vg1/swap
+```
+Create the root ext4 filesystem:
+```
+sudo mkfs.ext4 -L 'root' /dev/vg1/root
+```
+Mount root filesystem:
+```
+sudo mount -v /dev/vg1/root /mnt/debian
+```
+Mount EFI partition to its folder, check if `/dev/` is correct first:
+```
+sudo mkdir -vp /mnt/debian/efi; sudo mount -v /dev/sda1 /mnt/debian/efi
+```
+We will now activate the swap file:
+```
+sudo swapon /dev/mapper/vg1-swap
+```
+Let's see what we've accomplished, use `lsblk`:
+```
+user@debian:~$ lsblk
+NAME                MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINTS
+loop0                 7:0    0  1.2G  1 loop  /usr/lib/live/mount/rootfs/filesystem.squashfs
+                                              /run/live/rootfs/filesystem.squashfs
+sda                   8:0    0   15G  0 disk
+├─sda1                8:1    0  100M  0 part  /mnt/debian/efi
+└─sda2                8:2    0 14.9G  0 part
+  └─debian-cryptlvm 253:0    0 14.9G  0 crypt
+    ├─vg1-swap      253:1    0    2G  0 lvm   [SWAP]
+    └─vg1-root      253:2    0 12.9G  0 lvm   /mnt/debian
+sr0                  11:0    1  1.7G  0 rom   /usr/lib/live/mount/medium
+                                              /run/live/medium
+```
+Let's bootstratp the `sid` installation:
+```
+sudo debootstrap --arch amd64 sid /mnt/debian https://deb.debian.org/debian
 ```
