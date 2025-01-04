@@ -232,3 +232,15 @@ These packages are needed to generate the kernel image for the encrypted root pa
 ```
 apt install initramfs-tools cryptsetup cryptsetup-initramfs -y
 ```
+We can use the swap file for hibernation (optional):
+```
+> /etc/initramfs-tools/conf.d/resume printf 'RESUME=%s\n' "$(grep '[[:blank:]]swap' /etc/fstab | grep UU | cut -c '-41')"
+```
+Check if this worked:
+```
+cat /etc/initramfs-tools/conf.d/resume
+```
+Let's install tools for lvm:
+```
+apt install --fix-missing lvm2 linux-headers-amd64 linux-image-amd64
+```
