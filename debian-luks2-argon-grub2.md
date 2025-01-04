@@ -266,7 +266,7 @@ chmod -vR 600 /etc/keys
 ```
 Configure `crypttab`.
 ```
-echo "debian-cryptlvm UUID=$(blkid -s UUID -o value /dev/sdb2) /etc/keys/root.key luks,discard,key-slot=1" >> /etc/crypttab
+echo "debian-cryptlvm UUID=$(blkid -s UUID -o value /dev/sda2) /etc/keys/root.key luks,discard,key-slot=1" >> /etc/crypttab
 ```
 Add the key to `initramfs`.
 ```
@@ -302,4 +302,23 @@ rm -rf ./grub-extras/lua
 mkdir ./build_x86_64-efi; cd ./build_x86_64-efi
 
 ../configure --with-platform=efi --target=x86_64 --prefix="/usr" --sbindir="/usr/bin" --sysconfdir="/etc" --enable-boot-time --enable-cache-stats --enable-device-mapper --enable-grub-mkfont --enable-grub-mount --enable-mm-debug --disable-silent-rules --disable-werror  CPPFLAGS="$CPPFLAGS -O2" --enable-stack-protector --enable-liblzma
+
+make -j3 DESTDIR=/ bashcompletiondir=/usr/share/bash-completion/completions install
+install -D -m0644 ../grub-improved-luks2-git/grub.default /etc/default/grub; cd ../../..
+
+sed -i 's|GRUB_DISTRIBUTOR="Arch"|GRUB_DISTRIBUTOR="Debian"|g' /etc/default/grub; sed -i 's|#GRUB_ENABLE_CRYPTODISK=y|GRUB_ENABLE_CRYPTODISK=y|g' /etc/default/grub
+mkdir /boot/grub; grub-mkconfig -o /boot/grub/grub.cfg
+
+grub-install --target=x86_64-efi --efi-directory=/efi --boot-directory=/boot --modules="bli argon2 all_video boot btrfs cat chain configfile echo efifwsetup efinet ext2 fat font gettext gfxmenu gfxterm gfxterm_background gzio halt help hfsplus iso9660 jpeg keystatus loadenv loopback linux ls lsefi lsefimmap lsefisystab lssal memdisk minicmd normal ntfs part_apple part_msdos part_gpt password_pbkdf2 png probe reboot regexp search search_fs_uuid search_fs_file search_label serial sleep smbios squash4 test tpm true video xfs cpuid play cryptodisk gcry_arcfour gcry_blowfish gcry_camellia gcry_cast5 gcry_crc gcry_des gcry_dsa gcry_idea gcry_md4 gcry_md5 gcry_rfc2268 gcry_rijndael gcry_rmd160 gcry_rsa gcry_seed gcry_serpent gcry_sha1 gcry_sha256 gcry_sha512 gcry_tiger gcry_twofish gcry_whirlpool luks luks2 lvm mdraid09 mdraid1x raid5rec raid6rec" /dev/sda
+
+mkdir -vp /efi/EFI/BOOT; cp /efi/EFI/debian/grubx64.efi /efi/EFI/BOOT/; cp /usr/lib/shim/shimx64.efi /efi/EFI/BOOT/bootx64.efi; cp /usr/lib/shim/mmx64.efi /efi/EFI/BOOT/mmx64.efi
+
+efibootmgr -c -d /dev/sdb -p 1 -L  "Debian" -l '\EFI\BOOT\bootx64.efi'
+
+logout
+sudo swapoff /dev/mapper/vg1-swap
+sudo umount -vr /mnt/debian/efi
+sudo umount -vr /mnt/debian
+sudo cryptsetup close /dev/vg1/swap; sudo cryptsetup close /dev/vg1/root; cryptsetup close debian-cryptlvm
+
 ```
