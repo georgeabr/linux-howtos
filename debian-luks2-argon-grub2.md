@@ -192,3 +192,43 @@ Let's bootstratp the `sid` installation:
 ```
 sudo debootstrap --arch amd64 sid /mnt/debian https://deb.debian.org/debian
 ```
+Let's generate a `fstab`:
+```
+sudo genfstab -U /mnt/debian >> /mnt/debian/etc/fstab
+```
+We can set the hostname:
+```
+sudo sh -c "echo argon > /mnt/debian/etc/hostname"
+```
+We can add the hostname to the `hosts` file:
+```
+sudo sh -c "echo '127.0.1.1      argon' >> /mnt/debian/etc/hosts"
+```
+Let's chroot into the new installation as `root`.
+```
+sudo arch-chroot /mnt/debian /bin/bash --login
+```
+Set the new password for the `root` user:
+```
+passwd
+```
+Let's update the system.
+```
+apt update && apt upgrade
+```
+We will install locales.
+```
+apt install locales -y
+```
+We will configure the system locale. Choose `en_GB.UTF-8` or whatever is suitable.
+```
+dpkg-reconfigure locales
+```
+We will configure the time zone.
+```
+dpkg-reconfigure tzdata
+```
+These packages are needed to generate the kernel image for the encrypted root partition.
+```
+apt install initramfs-tools cryptsetup cryptsetup-initramfs -y
+```
