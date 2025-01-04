@@ -129,3 +129,23 @@ Are you sure? (Type 'yes' in capital letters): YES
 Enter passphrase for /dev/sda2:
 Verify passphrase:
 ```
+Open the LUKS2 partition, make sure you have the correct `/dev/` partition.
+```
+sudo cryptsetup open /dev/sda2 debian-cryptlvm
+```
+Create the physical volume.
+```
+sudo pvcreate /dev/mapper/debian-cryptlvm
+```
+Create the volume group.
+```
+sudo vgcreate vg1 /dev/mapper/debian-cryptlvm
+```
+Create the logical volume for the swap partition.
+```
+sudo lvcreate -L 2G vg1 -n swap
+```
+Create the logical volume for the root partition.
+```
+sudo lvcreate -l +100%FREE vg1 -n root
+```
