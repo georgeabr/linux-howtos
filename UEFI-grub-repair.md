@@ -50,3 +50,8 @@ Boot0009* Linux Boot Manager    HD(1,GPT,f8064846-b26a-4046-ac2c-458f2e136a61,0x
 Boot0001* Linux Boot Manager    HD(1,GPT,9c4a52a5-6e00-4b89-934c-3196b4703b22,0x800,0x64800)/\EFI\systemd\systemd-bootx64.efi
 
 ```
+Don't forget to modify `/etc/fstab`. It is best to replace `UUID` with `/dev/nvme0n1p1`:
+```
+# UUID=CB69-6A97          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
+/dev/nvme0n1p1          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
+```
