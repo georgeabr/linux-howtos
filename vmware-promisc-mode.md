@@ -53,3 +53,8 @@ $ systemctl status vmware-promisc.service
 Apr 18 11:37:23 fedora systemd[1]: Started vmware-promisc.service - VMware - enable promiscuous mode for all users to vmnet1 and vmnet8.
 Apr 18 11:37:23 fedora systemd[1]: vmware-promisc.service: Deactivated successfully.
 ```
+Check with `ls -lha /dev/vmnet8`.
+```bash
+$ ls -lha /dev/vmnet8
+crw-rw-rw-. 1 root root 119, 8 Apr 17 18:34 /dev/vmnet8
+```
