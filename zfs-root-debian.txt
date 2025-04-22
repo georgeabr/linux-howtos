@@ -2,6 +2,7 @@ sudo apt update
 sudo -i
 nano /etc/apt/sources.list
 # add "contrib" to the repos
+# change to sid
 apt update
 apt install --yes debootstrap gdisk dkms dpkg-dev linux-headers-$(uname -r)
 apt install --yes --no-install-recommends zfs-dkms
@@ -69,8 +70,12 @@ apt-get install firmware-iwlwifi
 
 nano /mnt/etc/apt/sources.list
 ## only these two lines should be present
-deb http://mirror.asergo.com/debian bullseye main contrib
-deb-src http://mirror.asergo.com/debian bullseye main contrib
+URIs: https://ftp.debian.org/debian/
+Suites: sid
+Components: contrib main non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+# deb http://mirror.asergo.com/debian bullseye main contrib
+# deb-src http://mirror.asergo.com/debian bullseye main contrib
 
 mount --rbind /dev  /mnt/dev
 mount --rbind /proc /mnt/proc
