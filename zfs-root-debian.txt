@@ -1,4 +1,3 @@
-```bash
 sudo apt update
 sudo -i
 nano /etc/apt/sources.list
@@ -188,11 +187,3 @@ apt dist-upgrade --yes
 tasksel
 
 reboot
-```
-
-
-
-
-
-
-
