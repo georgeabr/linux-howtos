@@ -1,5 +1,5 @@
-# download a Debian testing live DVD
-# https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-dvd/
+# download a Debian testing live desktop DVD
+# https://cdimage.debian.org/cdimage/weekly-live-builds/amd64/iso-hybrid/debian-live-testing-amd64-xfce.iso
 
 sudo apt update
 sudo -i
