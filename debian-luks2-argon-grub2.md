@@ -246,7 +246,15 @@ apt install --fix-missing lvm2 linux-headers-amd64 linux-image-amd64
 ```
 Let's install tools to compile grub:
 ```
-apt install --fix-missing shim-signed shim-helpers-amd64-signed libalpm13t64 sudo git curl libarchive-tools help2man python3 rsync texinfo texinfo-lib ttf-bitstream-vera build-essential dosfstools efibootmgr uuid-runtime efivar mtools os-prober dmeventd libdevmapper-dev libdevmapper-event1.02.1 libdevmapper1.02.1 libfont-freetype-perl python3-freetype libghc-gi-freetype2-dev libghc-gi-freetype2-prof fuse2fs libconfuse2 libfuse2t64 gettext xorriso libisoburn1t64 libisoburn-dev autogen gnulib libfreetype-dev pkg-config m4 libtool automake flex fuse3 libfuse3-dev gawk autoconf-archive rdfind fonts-dejavu lzma lzma-dev liblzma5 liblzma-dev liblz1 liblz-dev unifont acl libzfslinux-dev sbsigntool
+apt install --fix-missing shim-signed shim-helpers-amd64-signed libalpm13t64 \
+  sudo git curl libarchive-tools help2man python3 rsync texinfo texinfo-lib \
+  ttf-bitstream-vera build-essential dosfstools efibootmgr uuid-runtime efivar \
+  mtools os-prober dmeventd libdevmapper-dev libdevmapper-event1.02.1 libdevmapper1.02.1 \
+  libfont-freetype-perl python3-freetype libghc-gi-freetype2-dev libghc-gi-freetype2-prof \
+  fuse2fs libconfuse2 libfuse2t64 gettext xorriso libisoburn1t64 libisoburn-dev autogen \
+  gnulib libfreetype-dev pkg-config m4 libtool automake flex fuse3 libfuse3-dev gawk \
+  autoconf-archive rdfind fonts-dejavu lzma lzma-dev liblzma5 liblzma-dev liblz1 liblz-dev \
+  unifont acl libzfslinux-dev sbsigntool
 ```
 Create keys folder.
 ```
@@ -266,7 +274,8 @@ chmod -vR 600 /etc/keys
 ```
 Configure `crypttab`.
 ```
-echo "debian-cryptlvm UUID=$(blkid -s UUID -o value /dev/sda2) /etc/keys/root.key luks,discard,key-slot=1" >> /etc/crypttab
+echo "debian-cryptlvm UUID=$(blkid -s UUID -o value /dev/sda2) \
+  /etc/keys/root.key luks,discard,key-slot=1" >> /etc/crypttab
 ```
 Add the key to `initramfs`.
 ```
@@ -280,20 +289,29 @@ echo UMASK=0077 >>/etc/initramfs-tools/initramfs.conf
 apt-mark hold grub2 grub-pc grub-efi grub-efi-amd64
 useradd -mG cdrom,floppy,sudo,audio,dip,video,plugdev,netdev -s /usr/bin/bash -c 'George' george
 passwd george
-export PATH="$PATH:/bin/gcc:/sbin/gcc"; export GRUB_CONTRIB=./grub-extras; export GNULIB_SRCDIR=./gnulib; export CFLAGS=${CFLAGS/-fno-plt}
+export PATH="$PATH:/bin/gcc:/sbin/gcc"; export GRUB_CONTRIB=./grub-extras; \
+  export GNULIB_SRCDIR=./gnulib; export CFLAGS=${CFLAGS/-fno-plt}
 
 mv /usr/bin/mawk /usr/bin/mawk_bu;ln -s /usr/bin/gawk /usr/bin/mawk
 mkdir -vp /sources && cd sources
 git clone https://git.savannah.gnu.org/git/grub.git
 cd grub
-git clone https://git.savannah.nongnu.org/git/grub-extras.git;git clone https://aur.archlinux.org/grub-improved-luks2-git.git; git clone https://git.savannah.gnu.org/git/gnulib.git
-patch -Np1 -i ./grub-improved-luks2-git/add-GRUB_COLOR_variables.patch; patch -Np1 -i ./grub-improved-luks2-git/detect-archlinux-initramfs.patch
+git clone https://git.savannah.nongnu.org/git/grub-extras.git;\
+  git clone https://aur.archlinux.org/grub-improved-luks2-git.git; \
+  git clone https://git.savannah.gnu.org/git/gnulib.git
+patch -Np1 -i ./grub-improved-luks2-git/add-GRUB_COLOR_variables.patch; \
+  patch -Np1 -i ./grub-improved-luks2-git/detect-archlinux-initramfs.patch
 
-patch -Np1 -i ./grub-improved-luks2-git/argon_1.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_2.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_3.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_4.patch; patch -Np1 -i ./grub-improved-luks2-git/argon_5.patch
+patch -Np1 -i ./grub-improved-luks2-git/argon_1.patch; patch -Np1 \
+  -i ./grub-improved-luks2-git/argon_2.patch; patch -Np1 \
+  -i ./grub-improved-luks2-git/argon_3.patch; patch -Np1 \
+  -i ./grub-improved-luks2-git/argon_4.patch; patch -Np1 \
+  -i ./grub-improved-luks2-git/argon_5.patch
 
 patch -Np1 -i ./grub-improved-luks2-git/grub-install_luks2.patch
 
-sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu /usr/share/fonts/truetype/dejavu|g' -i "configure.ac"
+sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu \
+  /usr/share/fonts/truetype/dejavu|g' -i "configure.ac"
 sed 's|GNU/Linux|Linux|' -i "util/grub.d/10_linux.in"
 sed 's| ro | rw |g' -i "util/grub.d/10_linux.in"
 rm -rf ./grub-extras/lua
@@ -301,17 +319,32 @@ rm -rf ./grub-extras/lua
 ./bootstrap
 mkdir ./build_x86_64-efi; cd ./build_x86_64-efi
 
-../configure --with-platform=efi --target=x86_64 --prefix="/usr" --sbindir="/usr/bin" --sysconfdir="/etc" --enable-boot-time --enable-cache-stats --enable-device-mapper --enable-grub-mkfont --enable-grub-mount --enable-mm-debug --disable-silent-rules --disable-werror  CPPFLAGS="$CPPFLAGS -O2" --enable-stack-protector --enable-liblzma
+../configure --with-platform=efi --target=x86_64 --prefix="/usr" --sbindir="/usr/bin" \
+  --sysconfdir="/etc" --enable-boot-time --enable-cache-stats --enable-device-mapper \
+  --enable-grub-mkfont --enable-grub-mount --enable-mm-debug --disable-silent-rules \
+  --disable-werror  CPPFLAGS="$CPPFLAGS -O2" --enable-stack-protector --enable-liblzma
 
 make -j3 DESTDIR=/ bashcompletiondir=/usr/share/bash-completion/completions install
 install -D -m0644 ../grub-improved-luks2-git/grub.default /etc/default/grub; cd ../../..
 
-sed -i 's|GRUB_DISTRIBUTOR="Arch"|GRUB_DISTRIBUTOR="Debian"|g' /etc/default/grub; sed -i 's|#GRUB_ENABLE_CRYPTODISK=y|GRUB_ENABLE_CRYPTODISK=y|g' /etc/default/grub
+sed -i 's|GRUB_DISTRIBUTOR="Arch"|GRUB_DISTRIBUTOR="Debian"|g' /etc/default/grub; \
+  sed -i 's|#GRUB_ENABLE_CRYPTODISK=y|GRUB_ENABLE_CRYPTODISK=y|g' /etc/default/grub
 mkdir /boot/grub; grub-mkconfig -o /boot/grub/grub.cfg
 
-grub-install --target=x86_64-efi --efi-directory=/efi --boot-directory=/boot --modules="bli argon2 all_video boot btrfs cat chain configfile echo efifwsetup efinet ext2 fat font gettext gfxmenu gfxterm gfxterm_background gzio halt help hfsplus iso9660 jpeg keystatus loadenv loopback linux ls lsefi lsefimmap lsefisystab lssal memdisk minicmd normal ntfs part_apple part_msdos part_gpt password_pbkdf2 png probe reboot regexp search search_fs_uuid search_fs_file search_label serial sleep smbios squash4 test tpm true video xfs cpuid play cryptodisk gcry_arcfour gcry_blowfish gcry_camellia gcry_cast5 gcry_crc gcry_des gcry_dsa gcry_idea gcry_md4 gcry_md5 gcry_rfc2268 gcry_rijndael gcry_rmd160 gcry_rsa gcry_seed gcry_serpent gcry_sha1 gcry_sha256 gcry_sha512 gcry_tiger gcry_twofish gcry_whirlpool luks luks2 lvm mdraid09 mdraid1x raid5rec raid6rec" /dev/sda
+grub-install --target=x86_64-efi --efi-directory=/efi --boot-directory=/boot \
+  --modules="bli argon2 all_video boot btrfs cat chain configfile echo efifwsetup efinet \
+  ext2 fat font gettext gfxmenu gfxterm gfxterm_background gzio halt help hfsplus iso9660 \
+  jpeg keystatus loadenv loopback linux ls lsefi lsefimmap lsefisystab lssal memdisk minicmd \
+  normal ntfs part_apple part_msdos part_gpt password_pbkdf2 png probe reboot regexp search \
+  search_fs_uuid search_fs_file search_label serial sleep smbios squash4 test tpm true video \
+  xfs cpuid play cryptodisk gcry_arcfour gcry_blowfish gcry_camellia gcry_cast5 gcry_crc \
+  gcry_des gcry_dsa gcry_idea gcry_md4 gcry_md5 gcry_rfc2268 gcry_rijndael gcry_rmd160 \
+  gcry_rsa gcry_seed gcry_serpent gcry_sha1 gcry_sha256 gcry_sha512 gcry_tiger gcry_twofish \
+  gcry_whirlpool luks luks2 lvm mdraid09 mdraid1x raid5rec raid6rec" /dev/sda
 
-mkdir -vp /efi/EFI/BOOT; cp /efi/EFI/debian/grubx64.efi /efi/EFI/BOOT/; cp /usr/lib/shim/shimx64.efi /efi/EFI/BOOT/bootx64.efi; cp /usr/lib/shim/mmx64.efi /efi/EFI/BOOT/mmx64.efi
+mkdir -vp /efi/EFI/BOOT; cp /efi/EFI/debian/grubx64.efi /efi/EFI/BOOT/; \
+  cp /usr/lib/shim/shimx64.efi /efi/EFI/BOOT/bootx64.efi; \
+  cp /usr/lib/shim/mmx64.efi /efi/EFI/BOOT/mmx64.efi
 
 efibootmgr -c -d /dev/sdb -p 1 -L  "Debian" -l '\EFI\BOOT\bootx64.efi'
 
@@ -319,6 +352,7 @@ logout
 sudo swapoff /dev/mapper/vg1-swap
 sudo umount -vr /mnt/debian/efi
 sudo umount -vr /mnt/debian
-sudo cryptsetup close /dev/vg1/swap; sudo cryptsetup close /dev/vg1/root; cryptsetup close debian-cryptlvm
+sudo cryptsetup close /dev/vg1/swap; sudo cryptsetup close /dev/vg1/root; \
+  cryptsetup close debian-cryptlvm
 
 ```
