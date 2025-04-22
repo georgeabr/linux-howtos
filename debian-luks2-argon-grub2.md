@@ -40,7 +40,7 @@ Install the bootstrap tools and `gdisk` to partition disk.
 sudo apt install arch-install-scripts debootstrap gdisk cryptsetup dosfstools -y
 ```
 Use `lsblk` to see your disks, partitions. The `sda` disk is 15GB in size, we will use it to install Debian.
-```
+```bash
 user@debian:~$ lsblk
 NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
 loop0   7:0    0  1.2G  1 loop /usr/lib/live/mount/rootfs/filesystem.squashfs
@@ -50,7 +50,7 @@ sr0    11:0    1  1.7G  0 rom  /usr/lib/live/mount/medium
                                /run/live/medium
 ```
 Use `gdisk` to create a 100MB EFI partition and the rest of the disk for the Debian install.
-```
+```bash
 user@debian:~$ sudo gdisk /dev/sda
 GPT fdisk (gdisk) version 1.0.10
 
@@ -174,7 +174,7 @@ We will now activate the swap file:
 sudo swapon /dev/mapper/vg1-swap
 ```
 Let's see what we've accomplished, use `lsblk`:
-```
+```bash
 user@debian:~$ lsblk
 NAME                MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINTS
 loop0                 7:0    0  1.2G  1 loop  /usr/lib/live/mount/rootfs/filesystem.squashfs
@@ -245,7 +245,7 @@ Let's install tools for lvm:
 apt install --fix-missing lvm2 linux-headers-amd64 linux-image-amd64
 ```
 Let's install tools to compile grub:
-```
+```bash
 apt install --fix-missing shim-signed shim-helpers-amd64-signed libalpm13t64 \
   sudo git curl libarchive-tools help2man python3 rsync texinfo texinfo-lib \
   ttf-bitstream-vera build-essential dosfstools efibootmgr uuid-runtime efivar \
@@ -285,7 +285,7 @@ Yes.
 ```
 echo UMASK=0077 >>/etc/initramfs-tools/initramfs.conf
 ```
-```
+```bash
 apt-mark hold grub2 grub-pc grub-efi grub-efi-amd64
 useradd -mG cdrom,floppy,sudo,audio,dip,video,plugdev,netdev -s /usr/bin/bash -c 'George' george
 passwd george
