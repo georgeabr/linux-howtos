@@ -1,11 +1,23 @@
 # download a Debian testing live desktop DVD
 # https://cdimage.debian.org/cdimage/weekly-live-builds/amd64/iso-hybrid/debian-live-testing-amd64-xfce.iso
+# add the line below to /etc/ssh/sshd_config
+PermitRootLogin yes
+
+# restart 
+systemctl restart sshd
+
+# log in as root from other machine:
+ssh root@1p-address
 
 sudo apt update
 sudo -i
 nano /etc/apt/sources.list
 # add "contrib" to the repos
-# change to sid
+# change to sid, disable cdrom
+# deb [trusted=yes] file:/run/live/medium sid main non-free-firmware
+deb http://deb.debian.org/debian/ sid contrib main non-free-firmware
+deb-src http://deb.debian.org/debian/ sid contrib main non-free-firmware
+
 apt update
 apt install --yes debootstrap gdisk dkms dpkg-dev linux-headers-$(uname -r)
 apt install --yes --no-install-recommends zfs-dkms
@@ -37,13 +49,13 @@ zpool create -o ashift=12 -d \
     -o feature@allocation_classes=enabled \
     -O acltype=posixacl -O canmount=off -O compression=lz4 -O devices=off \
     -O normalization=formD -O relatime=on -O xattr=sa \
-    -O mountpoint=/ -R /mnt bpool ata-INTEL_SSDSCKJW240H6_CVTQ5480034U240B-part10
+    -O mountpoint=/ -R /mnt bpool /dev/nvme0n1p2
     
 # create the ROOT pool - part11
 zpool create -o ashift=12 \
     -O acltype=posixacl -O canmount=off -O compression=lz4 \
     -O dnodesize=auto -O normalization=formD -O relatime=on -O xattr=sa \
-    -O mountpoint=/ -R /mnt rpool ata-INTEL_SSDSCKJW240H6_CVTQ5480034U240B-part11
+    -O mountpoint=/ -R /mnt rpool /dev/nvme0n1p2
     
 zfs create -o canmount=off -o mountpoint=none rpool/ROOT
 zfs create -o canmount=off -o mountpoint=none bpool/BOOT
