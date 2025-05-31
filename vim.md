@@ -18,6 +18,30 @@ Line navigation:
 - `^` - to the first non-blank character of a line
 - `$` - to the end of the line
 
+File navigation:
+- `gg` - to thhe first line of the file
+- `G` - to the last line of the file
+- `nG` - to line number (`21G` goes to line `22`)
+
+Scrolling:
+- `Ctrl+F` - scroll down one screen
+- `Ctrl+B` - scroll up one screen
+- `zz` - centre current line on screen
+
+Edit commands:
+Delete:
+- `x` - delete character under the cursor
+- `dd` - delete entire line
+- `dw` - delete from cursor to the start of new word
+- `D` - delete from cursor to the end of line
+
+Undo/redo/change case
+- `u` - undo last change
+- `Ctrl+R` - redo the undone change
+- `.` - repeat last command
+- `~` - toggle case of character under cursor
+- 
+Test
 - `d` - delete  
 - `c` - change (delete and enter insert mode)  
 - `>` - indent
