@@ -21,7 +21,7 @@ Line navigation:
 File navigation:
 - `gg` - to thhe first line of the file
 - `G` - to the last line of the file
-- `nG` - to line number (`21G` goes to line `22`)
+- `nG` - to line number (`21G` goes to line *22*)
 
 Scrolling:
 - `Ctrl+F` - scroll down one screen
@@ -45,15 +45,6 @@ Visual mode/selection
 - `v` - select one character at a time
 - `V` - select one line at a time
 
-
-
-Test
-- `d` - delete  
-- `c` - change (delete and enter insert mode)  
-- `>` - indent
-- `u` - undo the last change
-- `.` - redo the last change/command
-
 ### Command-line mode
 - `:` - enter command-line mode
 - `:w` - save the file
@@ -68,3 +59,27 @@ Search and jump:
 - `n` - repeat last search in the same direction
 - `N` - repeat last search in the opposite direction
 - `%` - jump to matching bracket
+
+Other commands:
+- `:!command` - run an external command
+- `:help keyword` - help for Vim keyword
+
+
+### Another approach
+Verbs in Vim
+- `d` - delete  
+- `c` - change (delete and enter insert mode)  
+- `>` - increase indent
+- `<` - decrease intent
+
+Nouns/Motions
+- `w` - word/forward
+- `b` back/word
+- `2j` - down 2 lines
+
+Nouns/Text objects
+- `iw` - inner word/inside a word
+- `it` - inner tag/*HTML* tags for example
+- `i"` - inner quotes
+- `ip` - inner paragraph
+- `as` - a sentence
