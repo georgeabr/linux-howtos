@@ -69,7 +69,8 @@ Other commands:
 ### Another approach
 Verbs in Vim
 - `d` - delete  
-- `c` - change (delete and enter insert mode)  
+- `c` - change (delete and enter insert mode)
+- `y` - copy
 - `>` - increase indent/tab
 - `<` - decrease intent/tab
 
