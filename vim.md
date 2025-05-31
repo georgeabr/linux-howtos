@@ -69,8 +69,8 @@ Other commands:
 Verbs in Vim
 - `d` - delete  
 - `c` - change (delete and enter insert mode)  
-- `>` - increase indent
-- `<` - decrease intent
+- `>` - increase indent/tab
+- `<` - decrease intent/tab
 
 Nouns/Motions
 - `w` - word/forward
