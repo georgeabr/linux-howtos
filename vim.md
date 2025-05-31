@@ -40,10 +40,31 @@ Undo/redo/change case
 - `Ctrl+R` - redo the undone change
 - `.` - repeat last command
 - `~` - toggle case of character under cursor
-- 
+
+Visual mode/selection
+- `v` - select one character at a time
+- `V` - select one line at a time
+
+
+
 Test
 - `d` - delete  
 - `c` - change (delete and enter insert mode)  
 - `>` - indent
 - `u` - undo the last change
 - `.` - redo the last change/command
+
+### Command-line mode
+- `:` - enter command-line mode
+- `:w` - save the file
+- `:q` - quit Vim
+- `:q!` - quit without saving
+- `:wq` - save and quit
+- `:%s/old/new/g` - replace all matches of *old* with *new* in the file
+
+Search and jump:
+- `/pattern` - search down for *pattern*
+- `?pattern` - search up for *pattern*
+- `n` - repeat last search in the same direction
+- `N` - repeat last search in the opposite direction
+- `%` - jump to matching bracket
