@@ -103,13 +103,26 @@ File/buffer management
 - `:bd` closes the current buffer/file
 - `:bd` *number* closes buffer/file with *number*
 
-Splits
+Splits/creation
 - `:sp` or `:split` splits the current window into two panes, top and bottom
 - `:sp` *filename* opens *filename* in new split
 - `:vs` or `:vsplit` splits the current window into two panes, left and right
 - `:vs` *filename* does the same by opening *filename*
+Splits/navigation
 - `Ctrl+w` + `h` - move left
 - `Ctrl+w` + `l` - move right
 - `Ctrl+w` + `k` - move up
 - `Ctrl+w` + `j` - move down
 - `Ctrl+w` + `up`/`down`/`left`/`right` arrows does the same
+Splits/resize
+- `Ctrl+w` + `>`/`<` to increase/decrease witdth
+- `Ctrl+w` + `+`/`-` to increase/decrease height
+- `Ctrl+w` + `=` to make windows of equal size
+Splits/closing
+- `:q` to close current window
+- `:only` to close other windows/splits, except the current one
+Splits/other
+- `Ctrl+w` + `r` to swap splits
+- `:10sp` *filename* to open a horizontal split of *filename* with height *10*
+- `:30vs` *filename* for a vertical split with *30* colums of *filename*
+- `:help split` to get info on the command
