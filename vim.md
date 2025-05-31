@@ -88,3 +88,14 @@ Nouns/Text objects
 - `i(`, `i)` - inner *(* or *)*
 - `ip` - inner paragraph
 - `as` - a sentence
+
+File management
+- `:e` *filename* to open a file
+- `e:` to create an empty buffer/file
+- `:w` *filename* saves to a different file
+- `:w!` to overwrite existing file
+- `:ls` list open files/buffers
+- `:b` *buffer number* switches to it
+- :`bn` and `:bp` to switch to the next or previous file
+- `Ctrl+^` switches between the two most recent files/buffers
+- `:bd` closes the buffer/file
