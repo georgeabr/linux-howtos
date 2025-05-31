@@ -1,4 +1,5 @@
 [Reference here](https://ctoomey.com/mastering-the-vim-language-slides.pdf)
+[Video here](https://youtu.be/wlR5gYd6um0)
 
 ### In command/normal mode
 
