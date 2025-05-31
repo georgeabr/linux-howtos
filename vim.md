@@ -101,4 +101,15 @@ File/buffer management
 - :`bn` and `:bp` to switch to the next or previous file
 - `Ctrl+^` switches between the two most recent files/buffers
 - `:bd` closes the current buffer/file
-- `:bd` *2* closes buffer/file number *2*
+- `:bd` *number* closes buffer/file with *number*
+
+Splits
+- `:sp` or `:split` splits the current window into two panes, top and bottom
+- `:sp` *filename* opens *filename* in new split
+- `:vs` or `:vsplit` splits the current window into two panes, left and right
+- `:vs` *filename* does the same by opening *filename*
+- `Ctrl+w` + `h` - move left
+- `Ctrl+w` + `l` - move right
+- `Ctrl+w` + `k` - move up
+- `Ctrl+w` + `j` - move down
+- `Ctrl+w` + `up`/`down`/`left`/`right` arrows does the same
