@@ -81,5 +81,8 @@ Nouns/Text objects
 - `iw` - inner word/inside a word
 - `it` - inner tag/*HTML* tags for example
 - `i"` - inner quotes
+- `i{`, `i}` - inner *{* or *}*
+- `i[`, `i]` - inner *[* or *]*
+- `i(`, `i)` - inner *(* or *)*
 - `ip` - inner paragraph
 - `as` - a sentence
