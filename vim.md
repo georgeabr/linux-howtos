@@ -78,6 +78,7 @@ Nouns/Motions
 - `w` - word/forward
 - `b` back/word
 - `2j` - down 2 lines
+- `1k` - up 1 line
 
 Nouns/Text objects
 - `w` - change text from letter under cursor to the end of the word (*d_id*, `cw` *done* -> *done*)
