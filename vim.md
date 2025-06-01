@@ -114,6 +114,14 @@ File/buffer management
 - `:bd` closes the current buffer/file
 - `:bd` *number* closes buffer/file with *number*
 
+File tabs
+- `:tabs` shows open tabs
+- `:tabe` *filename* opens it i a new tab
+- `:tabc` closes the current tab
+- `:tabonly` closes all other tabs
+- `gt`/`:tabnext` and `gT`/`:tabprevious` to to go to the next/previous tab
+- 
+
 Splits/creation
 - `:sp` or `:split` splits the current window into two panes, top and bottom
 - `:sp` *filename* opens *filename* in new split
