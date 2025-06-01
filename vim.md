@@ -80,6 +80,11 @@ Verbs in Vim
 Nouns/Motions
 - `w` - word/forward
 - `b` back/word
+- `f` + *symbol* (`f`+`(`) goes to the *next* symbol in the current line
+- `F` + *symbol* (`F`+`(`) goes to the *previous* symbol in the current line
+- `t` + *symbol* (`t`+`(`) goes before *next* symbol in the current line
+- `t` + *symbol* (`T`+`(`) goes after the *previous* symbol in the current line
+  - symbols - `(`, `)`, `[`, `]`, `{`, `}`, `\`, `/`, `,`, `.`, `:`, `;`, `+`, `-`, `=`, `_`, `%`, etc.
 - `2j` - down 2 lines (use relative line numbers)
 - `1k` - up 1 line
 
