@@ -20,7 +20,7 @@ Line navigation:
 - `$` - to the end of the line
 
 File navigation:
-- `gg` - to thhe first line of the file
+- `gg` - to the first line of the file
 - `G` - to the last line of the file
 - `nG` - to line number (`21G` goes to line *22*)
 
