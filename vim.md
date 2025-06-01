@@ -81,14 +81,20 @@ Nouns/Motions
 
 Nouns/Text objects
 - `w` - change text from letter under cursor to the end of the word (*d_id*, `cw` *done* -> *done*)
-- `iw` - inner word/entire word (*d_id*, `ciw` *done* -> *one*)
+- `iw` - inner word/entire word, no withespace (*d_id*, `ciw` *done* -> *one*)
+- `aw` - entire word and whitespace
 - `it` - inner tag/*HTML* tags for example
-- `i"` - inner quotes
-- `i{`, `i}` - inner *{* or *}*
-- `i[`, `i]` - inner *[* or *]*
-- `i(`, `i)` - inner *(* or *)*
-- `ip` - inner paragraph
-- `as` - a sentence
+- `i'` - inner single quotes, text only
+- `i"` - inner double quotes, text only
+- `a'` - inner single quotes, text and quotes
+- `a"` - inner double quotes, text and quotes
+- `i{`, `i}`, `a{`, `a}` - `i` inner text only, `a` includes *{* or *}*
+- `i[`, `i]`,`a[`, `a]` - inner text only, `a` includes *[* or *]*
+- `i(`, `i)`, `a(`, `a)` - inner text only, `a` includes *(* or *)*
+- `ip` - inner paragraph without whitespaces around it
+- `ap` - the paragraph and trailing newlines and whitespaces
+- `is` - the sentence the cursor is in, without extra space or punctuation
+- `as` - a sentence including punctiation and spacing
 
 File/buffer management
 - `:e` *filename* to open a file
