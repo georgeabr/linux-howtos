@@ -80,7 +80,8 @@ Nouns/Motions
 - `2j` - down 2 lines
 
 Nouns/Text objects
-- `iw` - inner word/inside a word
+- `w` - change text from letter under cursor to the end of the word (*d_id*, `cw` *done* -> *done*)
+- `iw` - inner word/entire word (*d_id*, `ciw` *done* -> *one*)
 - `it` - inner tag/*HTML* tags for example
 - `i"` - inner quotes
 - `i{`, `i}` - inner *{* or *}*
