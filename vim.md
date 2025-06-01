@@ -102,14 +102,14 @@ Nouns/Text objects
 
 File/buffer management
 - `:e` *filename* to open a file
-- `e:` to create an empty buffer/file
+- `:e` to create an empty buffer/file
 - `:w` *filename* saves to a different file
 - `:w!` to overwrite existing file
 - `:badd` *filename* to add it to the buffer list without opening it
 - `:ls` list open files/buffers
 - `:b` *buffer number* switches to it
 - `:b` *text* switches to file with *text* in its name
-- :`bn` and `:bp` to switch to the next or previous file
+- `:bn` and `:bp` to switch to the next or previous file
 - `Ctrl+^` switches between the two most recent files/buffers
 - `:bd` closes the current buffer/file
 - `:bd` *number* closes buffer/file with *number*
@@ -145,3 +145,7 @@ Splits/other
 - `:10sp` *filename* to open a horizontal split of *filename* with height *10*
 - `:30vs` *filename* for a vertical split with *30* colums of *filename*
 - `:help split` to get info on the command
+
+Terminal
+- `:term` launches a terminal/shell session as a window split
+- use `Ctrl+w` + `h`/`j`/`k`/`l` to move between the splits
