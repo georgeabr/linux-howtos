@@ -111,6 +111,7 @@ File/buffer management
 - `:w` *filename* saves to a different file
 - `:w!` to overwrite existing file
 - `:badd` *filename* to add it to the buffer list without opening it
+- `:set readonly`, `:set noreadonly` - set file to readonly or undo
 - `:ls` list open files/buffers
 - `:b` *buffer number* switches to it
 - `:b` *text* switches to file with *text* in its name
