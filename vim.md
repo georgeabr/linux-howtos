@@ -71,6 +71,9 @@ Verbs in Vim
 - `d` - delete  
 - `c` - change (delete and enter insert mode)
 - `y` - copy
+- `yy` - copy current line
+- `p` - paste text *after* the cursor
+- `P` - paste text *before* the cursor
 - `>` - increase indent/tab
 - `<` - decrease intent/tab
 
