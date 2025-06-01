@@ -116,7 +116,7 @@ File/buffer management
 
 File tabs
 - `:tabs` shows open tabs
-- `:tabe` *filename* opens it i a new tab
+- `:tabe` *filename* opens it in a new tab
 - `:tabc` closes the current tab
 - `:tabonly` closes all other tabs
 - `gt`/`:tabnext` and `gT`/`:tabprevious` to to go to the next/previous tab
