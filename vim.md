@@ -77,7 +77,7 @@ Verbs in Vim
 Nouns/Motions
 - `w` - word/forward
 - `b` back/word
-- `2j` - down 2 lines
+- `2j` - down 2 lines (use relative line numbers)
 - `1k` - up 1 line
 
 Nouns/Text objects
