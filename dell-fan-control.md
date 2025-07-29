@@ -123,3 +123,100 @@ make
 chmod +x dell-bios-fan-control
 sudo cp dell-bios-fan-control /usr/bin
 ```
+### Useful software
+- `pwmtest.sh` to test fan RPM
+```
+#!/bin/bash
+# pwmtest.sh — test MINSTART/MINSTOP empirically
+
+PWM_DEV="/sys/class/hwmon/hwmon7/pwm1"
+FAN_DEV="/sys/class/hwmon/hwmon7/fan1_input"
+
+test_pwm() {
+    local pwmval="$1"
+    echo "$pwmval" > "$PWM_DEV"
+    sleep 2
+    local rpm=$(cat "$FAN_DEV")
+    printf "PWM %3d → RPM %5d\n" "$pwmval" "$rpm"
+}
+
+# Ramp up
+echo "Testing MINSTART sequence..."
+for pwm in $(seq 0 10 100); do
+    test_pwm "$pwm"
+done
+
+# Ramp down
+echo "Testing MINSTOP sequence..."
+for pwm in $(seq 100 -10 0); do
+    test_pwm "$pwm"
+done
+
+# Reset
+echo 0 > "$PWM_DEV"
+```
+- `monitor_fans.sh` to check fans speed and CPU temperature; use `./monitor_fans.sh | tee fan-cpu.txt` to get an onscreen and log output
+```
+#!/bin/bash
+
+# Configuration for your sensors and fans
+# Ensure these paths are correct for your system
+CPU_TEMP_DEV="/sys/class/hwmon/hwmon8/temp4_input"
+FAN1_RPM_DEV="/sys/class/hwmon/hwmon7/fan1_input"  # This is for CPU Fan
+FAN2_RPM_DEV="/sys/class/hwmon/hwmon7/fan2_input"  # This is for GPU Fan
+
+# Add PWM device paths for fan control output
+FAN1_PWM_DEV="/sys/class/hwmon/hwmon7/pwm1" # Based on your fancontrol config (CPU Fan PWM)
+FAN2_PWM_DEV="/sys/class/hwmon/hwmon7/pwm2" # Based on your fancontrol config (GPU Fan PWM)
+
+# Loop indefinitely to provide continuous, scrolling output
+echo "Monitoring CPU/GPU Fan RPMs, PWM Values, and CPU Temperature (Ctrl+C to exit)..."
+echo "---------------------------------------------------------------------------------"
+
+while true; do
+    # Get raw sensor data
+    cpu_raw=$(cat "$CPU_TEMP_DEV" 2>/dev/null)
+    fan1_raw=$(cat "$FAN1_RPM_DEV" 2>/dev/null)
+    fan2_raw=$(cat "$FAN2_RPM_DEV" 2>/dev/null)
+    fan1_pwm_raw=$(cat "$FAN1_PWM_DEV" 2>/dev/null)
+    fan2_pwm_raw=$(cat "$FAN2_PWM_DEV" 2>/dev/null)
+
+    # Process and format data
+    cpu_temp_c="N/A"
+    if [[ -n "$cpu_raw" ]]; then
+        cpu_temp_c=$((cpu_raw / 1000))
+    fi
+
+    fan1_rpm="N/A"
+    if [[ -n "$fan1_raw" ]]; then
+        fan1_rpm="$fan1_raw RPM"
+    fi
+
+    fan2_rpm="N/A"
+    if [[ -n "$fan2_raw" ]]; then
+        fan2_rpm="$fan2_raw RPM"
+    fi
+
+    fan1_pwm="N/A"
+    if [[ -n "$fan1_pwm_raw" ]]; then
+        fan1_pwm="$fan1_pwm_raw PWM"
+    fi
+
+    fan2_pwm="N/A"
+    if [[ -n "$fan2_pwm_raw" ]]; then
+        fan2_pwm="$fan2_pwm_raw PWM"
+    fi
+
+    # Print with timestamp, and updated labels
+    printf "[%s] CPU Temp: %2d°C | CPU Fan: %8s (%5s) | GPU Fan: %8s (%5s)\n" \
+           "$(date +%H:%M:%S)" \
+           "$cpu_temp_c" \
+           "$fan1_rpm" \
+           "$fan1_pwm" \
+           "$fan2_rpm" \
+           "$fan2_pwm"
+
+    # Wait for 2 seconds before the next reading
+    sleep 2
+done
+```
