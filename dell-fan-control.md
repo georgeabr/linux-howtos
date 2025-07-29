@@ -222,3 +222,48 @@ while true; do
     sleep 2
 done
 ```
+### To check
+- `systemctl status fancontrol.service`
+```
+  ● fancontrol.service - Start fan control, if configured
+     Loaded: loaded (/usr/lib/systemd/system/fancontrol.service; enabled; preset: disabled)
+    Drop-In: /etc/systemd/system/fancontrol.service.d
+             └─10-bios-override.conf
+             /usr/lib/systemd/system/service.d
+             └─10-timeout-abort.conf
+     Active: active (running) since Tue 2025-07-29 11:48:31 BST; 1h 8min ago
+ Invocation: 3c5f6c564e434c3bb956ed86685eb911
+   Main PID: 2320 (fancontrol)
+      Tasks: 2 (limit: 4915)
+     Memory: 1.4M (peak: 7.2M)
+        CPU: 6.769s
+     CGroup: /system.slice/fancontrol.service
+             ├─2320 /usr/bin/bash /usr/sbin/fancontrol
+             └─7995 sleep 10
+
+Jul 29 11:48:31 fedora fancontrol[2320]:   Controls hwmon7/fan1_input
+Jul 29 11:48:31 fedora fancontrol[2320]:   MINTEMP=20
+Jul 29 11:48:31 fedora fancontrol[2320]:   MAXTEMP=80
+Jul 29 11:48:31 fedora fancontrol[2320]:   MINSTART=80
+Jul 29 11:48:31 fedora fancontrol[2320]:   MINSTOP=80
+Jul 29 11:48:31 fedora fancontrol[2320]:   MINPWM=0
+Jul 29 11:48:31 fedora fancontrol[2320]:   MAXPWM=255
+Jul 29 11:48:31 fedora fancontrol[2320]:   AVERAGE=6
+Jul 29 11:48:31 fedora fancontrol[2320]: Enabling PWM on fans...
+Jul 29 11:48:31 fedora fancontrol[2320]: Starting automatic fan control...
+  ```
+- `systemctl status dell-bios-fan-control.service`
+```
+● dell-bios-fan-control.service - Disable Dell BIOS fan arbitration
+     Loaded: loaded (/etc/systemd/system/dell-bios-fan-control.service; static)
+    Drop-In: /usr/lib/systemd/system/service.d
+             └─10-timeout-abort.conf
+     Active: active (exited) since Mon 2025-07-28 23:36:25 BST; 13h ago
+ Invocation: b3cd8065ed794db3a47cd541ca26e21a
+    Process: 653 ExecStart=/usr/bin/dell-bios-fan-control 0 (code=exited, status=0/SUCCESS)
+   Main PID: 653 (code=exited, status=0/SUCCESS)
+   Mem peak: 1.1M
+        CPU: 4ms
+
+Jul 28 23:36:25 fedora dell-bios-fan-control[653]: BIOS CONTROL DISABLED
+```
