@@ -1,3 +1,9 @@
+- To configure sensors; first install `dell-bios-fan-control`:
+```bash
+sudo dell-bios-fan-control 0
+sudo sensors-detect
+sudo pwmconfig
+```
 - Install `lm_sensors` package; it provides `fancontrol`
 - Copy the content below to `/etc/fancontrol`:
 ```
