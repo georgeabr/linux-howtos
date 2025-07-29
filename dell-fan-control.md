@@ -223,7 +223,9 @@ while true; do
 done
 ```
 ### To check
-- `systemctl status fancontrol.service`
+```bash
+systemctl status fancontrol.service
+```
 ```
   ● fancontrol.service - Start fan control, if configured
      Loaded: loaded (/usr/lib/systemd/system/fancontrol.service; enabled; preset: disabled)
@@ -252,7 +254,9 @@ Jul 29 11:48:31 fedora fancontrol[2320]:   AVERAGE=6
 Jul 29 11:48:31 fedora fancontrol[2320]: Enabling PWM on fans...
 Jul 29 11:48:31 fedora fancontrol[2320]: Starting automatic fan control...
   ```
-- `systemctl status dell-bios-fan-control.service`
+```bash
+systemctl status dell-bios-fan-control.service
+```
 ```
 ● dell-bios-fan-control.service - Disable Dell BIOS fan arbitration
      Loaded: loaded (/etc/systemd/system/dell-bios-fan-control.service; static)
