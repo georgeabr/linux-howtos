@@ -162,7 +162,6 @@ echo 0 > "$PWM_DEV"
 #!/bin/bash
 
 # Configuration for your sensors and fans
-# Ensure these paths are correct for your system
 CPU_TEMP_DEV="/sys/class/hwmon/hwmon8/temp4_input"
 FAN1_RPM_DEV="/sys/class/hwmon/hwmon7/fan1_input"  # This is for CPU Fan
 FAN2_RPM_DEV="/sys/class/hwmon/hwmon7/fan2_input"  # This is for GPU Fan
@@ -170,6 +169,14 @@ FAN2_RPM_DEV="/sys/class/hwmon/hwmon7/fan2_input"  # This is for GPU Fan
 # Add PWM device paths for fan control output
 FAN1_PWM_DEV="/sys/class/hwmon/hwmon7/pwm1" # Based on your fancontrol config (CPU Fan PWM)
 FAN2_PWM_DEV="/sys/class/hwmon/hwmon7/pwm2" # Based on your fancontrol config (GPU Fan PWM)
+
+# --- Define fixed widths for formatting ---
+# Max expected RPM is around 5000-6000, so 5 digits. Plus " RPM" and a space.
+# 5000 RPM -> " 5000 RPM" (space for padding)
+FAN_RPM_WIDTH=9 # e.g., " 5000 RPM" or "    0 RPM"
+
+# PWM values are 0-255, so 3 digits. Plus " PWM" and a space.
+PWM_WIDTH=7 # e.g., "  80 PWM" or " 255 PWM"
 
 # Loop indefinitely to provide continuous, scrolling output
 echo "Monitoring CPU/GPU Fan RPMs, PWM Values, and CPU Temperature (Ctrl+C to exit)..."
@@ -189,34 +196,46 @@ while true; do
         cpu_temp_c=$((cpu_raw / 1000))
     fi
 
-    fan1_rpm="N/A"
+    # Format Fan 1 RPM
+    fan1_rpm_display="N/A"
     if [[ -n "$fan1_raw" ]]; then
-        fan1_rpm="$fan1_raw RPM"
+        printf -v fan1_rpm_display "%5d RPM" "$fan1_raw" # Pad RPM to 5 digits, then add " RPM"
+    else
+        printf -v fan1_rpm_display "%${FAN_RPM_WIDTH}s" "N/A" # Pad N/A to full width
     fi
 
-    fan2_rpm="N/A"
+    # Format Fan 2 RPM
+    fan2_rpm_display="N/A"
     if [[ -n "$fan2_raw" ]]; then
-        fan2_rpm="$fan2_raw RPM"
+        printf -v fan2_rpm_display "%5d RPM" "$fan2_raw" # Pad RPM to 5 digits, then add " RPM"
+    else
+        printf -v fan2_rpm_display "%${FAN_RPM_WIDTH}s" "N/A" # Pad N/A to full width
     fi
 
-    fan1_pwm="N/A"
+    # Format Fan 1 PWM
+    fan1_pwm_display="N/A"
     if [[ -n "$fan1_pwm_raw" ]]; then
-        fan1_pwm="$fan1_pwm_raw PWM"
+        printf -v fan1_pwm_display "%3d PWM" "$fan1_pwm_raw" # Pad PWM to 3 digits, then add " PWM"
+    else
+        printf -v fan1_pwm_display "%${PWM_WIDTH}s" "N/A" # Pad N/A to full width
     fi
 
-    fan2_pwm="N/A"
+    # Format Fan 2 PWM
+    fan2_pwm_display="N/A"
     if [[ -n "$fan2_pwm_raw" ]]; then
-        fan2_pwm="$fan2_pwm_raw PWM"
+        printf -v fan2_pwm_display "%3d PWM" "$fan2_pwm_raw" # Pad PWM to 3 digits, then add " PWM"
+    else
+        printf -v fan2_pwm_display "%${PWM_WIDTH}s" "N/A" # Pad N/A to full width
     fi
 
-    # Print with timestamp, and updated labels
-    printf "[%s] CPU Temp: %2d°C | CPU Fan: %8s (%5s) | GPU Fan: %8s (%5s)\n" \
+    # Print with timestamp, and updated labels with fixed column widths
+    printf "[%s] CPU Temp: %2d°C | CPU Fan: %s (%s) | GPU Fan: %s (%s)\n" \
            "$(date +%H:%M:%S)" \
            "$cpu_temp_c" \
-           "$fan1_rpm" \
-           "$fan1_pwm" \
-           "$fan2_rpm" \
-           "$fan2_pwm"
+           "$fan1_rpm_display" \
+           "$fan1_pwm_display" \
+           "$fan2_rpm_display" \
+           "$fan2_pwm_display"
 
     # Wait for 2 seconds before the next reading
     sleep 2
