@@ -109,3 +109,11 @@ Wants=dell-bios-fan-control.service
 ```
 options dell_smm_hwmon force=1
 ```
+- Run the below to clone and install `Dell BIOS fan control` executable
+```bash
+git clone https://github.com/TomFreudenberg/dell-bios-fan-control`
+cd dell-bios-fan-control/
+make
+chmod +x dell-bios-fan-control
+sudo cp dell-bios-fan-control /usr/bin
+```
