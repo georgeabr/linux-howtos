@@ -1,3 +1,5 @@
+### Main programs
+These are needed to configure fan control by userspace programs, as the Dell BIOS suddenly starts and stops the fan
 - To configure sensors; first install `dell-bios-fan-control`:
 ```bash
 sudo dell-bios-fan-control 0
@@ -123,7 +125,7 @@ make
 chmod +x dell-bios-fan-control
 sudo cp dell-bios-fan-control /usr/bin
 ```
-### Useful software
+### Useful software to debug
 - `pwmtest.sh` to test fan RPM
 ```
 #!/bin/bash
