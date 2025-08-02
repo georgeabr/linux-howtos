@@ -15,8 +15,7 @@ sudo pwmconfig
 # to eliminate the jarring "off-to-on" spike.
 
 INTERVAL=10
-#AVERAGE=4
-AVERAGE=hwmon7/pwm1=6 hwmon7/pwm2=6
+AVERAGE=hwmon7/pwm1=5 hwmon7/pwm2=5
 
 DEVPATH=hwmon7=devices/platform/dell_smm_hwmon hwmon8=devices/platform/coretemp.0
 DEVNAME=hwmon7=dell_smm hwmon8=coretemp
