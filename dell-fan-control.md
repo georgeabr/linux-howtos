@@ -112,7 +112,7 @@ WantedBy=multi-user.target
 After=dell-bios-fan-control.service
 Wants=dell-bios-fan-control.service
 ```
-- Create `/etc/modprobe.d/dell_smm_hwmon.conf`
+- Create `/etc/modprobe.d/dell_smm_hwmon.conf` (only if issues, not needed normally)
 ```
 options dell_smm_hwmon force=1
 ```
