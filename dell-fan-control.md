@@ -106,6 +106,10 @@ ExecStart=/usr/sbin/fancontrol
 [Install]
 WantedBy=multi-user.target
 ```
+- Enable it
+```bash
+sudo systemctl enable --now fancontrol.service
+  ```
 - Create `/etc/systemd/system/fancontrol.service.d/10-bios-override.conf`
 ```
 [Unit]
