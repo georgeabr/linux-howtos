@@ -79,6 +79,10 @@ case "$1" in
         ;;
 esac
 ```
+- Make it executable:
+```bash
+sudo chmod +x /lib/systemd/system-sleep/fancontrol-resume
+```
 - Create `/etc/systemd/system/dell-bios-fan-control.service`:
 ```
 [Unit]
