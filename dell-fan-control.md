@@ -7,6 +7,7 @@ sudo sensors-detect
 sudo pwmconfig
 ```
 #### In detail
+- Install `lm_sensors` or `lm-sensors` package; it provides `fancontrol`
 - Create a `udev` rule to properly get the Dell sensor name and locaiton
 ```bash
   sudo nano /etc/udev/rules.d/99-fancontrol-stable.rules
@@ -23,8 +24,6 @@ ACTION=="add|change", SUBSYSTEM=="hwmon", ATTR{name}=="coretemp", RUN+="/usr/bin
 ```bash
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
-
-- Install `lm_sensors` or `lm-sensors` package; it provides `fancontrol`
 - Edit the `fancontrol` file:
 ```bash
 sudo nano /etc/fancontrol 
