@@ -156,8 +156,9 @@ sudo cp dell-bios-fan-control /usr/bin
 #!/bin/bash
 # pwmtest.sh — test MINSTART/MINSTOP empirically
 
-PWM_DEV="/sys/class/hwmon/hwmon7/pwm1"
-FAN_DEV="/sys/class/hwmon/hwmon7/fan1_input"
+# pwmtest.sh — updated for stable symlinks
+PWM_DEV="/dev/hwmon-dell/pwm1"
+FAN_DEV="/dev/hwmon-dell/fan1_input"
 
 test_pwm() {
     local pwmval="$1"
@@ -187,13 +188,13 @@ echo 0 > "$PWM_DEV"
 #!/bin/bash
 
 # Configuration for your sensors and fans
-CPU_TEMP_DEV="/sys/class/hwmon/hwmon8/temp4_input"
-FAN1_RPM_DEV="/sys/class/hwmon/hwmon7/fan1_input"  # This is for CPU Fan
-FAN2_RPM_DEV="/sys/class/hwmon/hwmon7/fan2_input"  # This is for GPU Fan
+# monitor_fans.sh — updated for stable symlinks
 
-# Add PWM device paths for fan control output
-FAN1_PWM_DEV="/sys/class/hwmon/hwmon7/pwm1" # Based on your fancontrol config (CPU Fan PWM)
-FAN2_PWM_DEV="/sys/class/hwmon/hwmon7/pwm2" # Based on your fancontrol config (GPU Fan PWM)
+CPU_TEMP_DEV="/dev/hwmon-coretemp/temp1_input"
+FAN1_RPM_DEV="/dev/hwmon-dell/fan1_input"
+FAN2_RPM_DEV="/dev/hwmon-dell/fan2_input"
+FAN1_PWM_DEV="/dev/hwmon-dell/pwm1"
+FAN2_PWM_DEV="/dev/hwmon-dell/pwm2"
 
 # --- Define fixed widths for formatting ---
 # Max expected RPM is around 5000-6000, so 5 digits. Plus " RPM" and a space.
