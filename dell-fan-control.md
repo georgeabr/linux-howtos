@@ -11,6 +11,7 @@ sudo pwmconfig
 ```bash
   sudo nano /etc/udev/rules.d/99-fancontrol-stable.rules
  ```
+Copy this in:
 ```
   # Create a stable symlink for Dell SMM (Fans)
 ACTION=="add|change", SUBSYSTEM=="hwmon", ATTR{name}=="dell_smm", RUN+="/usr/bin/ln -sfT /sys/class/hwmon/$name /dev/hwmon-dell"
@@ -28,6 +29,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ```bash
 sudo nano /etc/fancontrol 
 ```
+Copy this in:
 ```
 # Configuration using stable udev symlinks
 INTERVAL=10
@@ -60,6 +62,7 @@ FCSTATES=/dev/hwmon-dell/pwm2=80=20 80=50 200=60 225=70 255=80
 ```bash
 sudo nano /lib/systemd/system-sleep/fancontrol-resume
 ```
+Copy this in:
 ```
 #!/bin/bash
 #if [ "$1" = "post" ]; then
@@ -87,7 +90,11 @@ esac
 ```bash
 sudo chmod +x /lib/systemd/system-sleep/fancontrol-resume
 ```
-- Create `/etc/systemd/system/dell-bios-fan-control.service`:
+- Create `system/dell-bios-fan-control.service`:
+```bash
+sudo nano /etc/systemd/system/dell-bios-fan-control.service
+```
+Copy this in:
 ```
 [Unit]
 Description=Disable Dell BIOS fan arbitration
