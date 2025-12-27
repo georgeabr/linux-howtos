@@ -263,9 +263,11 @@ while true; do
 done
 ```
 ### To check
+Display the `fancontrol.service` service status:
 ```bash
 systemctl status fancontrol.service
 ```
+It should display something like this (`loaded`/`enabled`)
 ```
 george@xps:~$ systemctl status fancontrol.service
 ● fancontrol.service - Start fan control, if configured
@@ -290,9 +292,11 @@ Dec 27 16:11:22 xps fancontrol[329642]:   MINSTOP=100
 Dec 27 16:11:22 xps fancontrol[329642]:   MINPWM=100
 Dec 27 16:11:22 xps fancontrol[329642]:   MAXPWM=255
 ```
+To check the `dell-bios-fan-control` service status:
 ```bash
 systemctl status dell-bios-fan-control.service
 ```
+It should output:
 ```
 ● dell-bios-fan-control.service - Disable Dell BIOS fan arbitration
      Loaded: loaded (/etc/systemd/system/dell-bios-fan-control.service; static)
