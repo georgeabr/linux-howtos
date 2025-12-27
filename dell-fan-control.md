@@ -271,33 +271,29 @@ done
 systemctl status fancontrol.service
 ```
 ```
-  ● fancontrol.service - Start fan control, if configured
-     Loaded: loaded (/usr/lib/systemd/system/fancontrol.service; enabled; preset: disabled)
+george@xps:~$ systemctl status fancontrol.service
+● fancontrol.service - Start fan control, if configured
+     Loaded: loaded (/usr/lib/systemd/system/fancontrol.service; enabled; preset: enabled)
     Drop-In: /etc/systemd/system/fancontrol.service.d
              └─10-bios-override.conf
-             /usr/lib/systemd/system/service.d
-             └─10-timeout-abort.conf
-     Active: active (running) since Tue 2025-07-29 11:48:31 BST; 1h 8min ago
- Invocation: 3c5f6c564e434c3bb956ed86685eb911
-   Main PID: 2320 (fancontrol)
-      Tasks: 2 (limit: 4915)
-     Memory: 1.4M (peak: 7.2M)
-        CPU: 6.769s
+     Active: active (running) since Sat 2025-12-27 16:11:22 GMT; 6min ago
+ Invocation: 878b62ec0570460bb151629685e53195
+   Main PID: 329642 (fancontrol)
+      Tasks: 2 (limit: 76403)
+     Memory: 2.3M (peak: 13.3M)
+        CPU: 3.107s
      CGroup: /system.slice/fancontrol.service
-             ├─2320 /usr/bin/bash /usr/sbin/fancontrol
-             └─7995 sleep 10
+             ├─329642 /bin/bash /usr/sbin/fancontrol
+             └─331896 sleep 2
 
-Jul 29 11:48:31 fedora fancontrol[2320]:   Controls hwmon7/fan1_input
-Jul 29 11:48:31 fedora fancontrol[2320]:   MINTEMP=20
-Jul 29 11:48:31 fedora fancontrol[2320]:   MAXTEMP=80
-Jul 29 11:48:31 fedora fancontrol[2320]:   MINSTART=80
-Jul 29 11:48:31 fedora fancontrol[2320]:   MINSTOP=80
-Jul 29 11:48:31 fedora fancontrol[2320]:   MINPWM=0
-Jul 29 11:48:31 fedora fancontrol[2320]:   MAXPWM=255
-Jul 29 11:48:31 fedora fancontrol[2320]:   AVERAGE=6
-Jul 29 11:48:31 fedora fancontrol[2320]: Enabling PWM on fans...
-Jul 29 11:48:31 fedora fancontrol[2320]: Starting automatic fan control...
-  ```
+Dec 27 16:11:22 xps fancontrol[329642]:   Controls /dev/hwmon-dell/fan2_input
+Dec 27 16:11:22 xps fancontrol[329642]:   MINTEMP=60
+Dec 27 16:11:22 xps fancontrol[329642]:   MAXTEMP=85
+Dec 27 16:11:22 xps fancontrol[329642]:   MINSTART=128
+Dec 27 16:11:22 xps fancontrol[329642]:   MINSTOP=100
+Dec 27 16:11:22 xps fancontrol[329642]:   MINPWM=100
+Dec 27 16:11:22 xps fancontrol[329642]:   MAXPWM=255
+```
 ```bash
 systemctl status dell-bios-fan-control.service
 ```
