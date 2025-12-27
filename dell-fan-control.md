@@ -3,6 +3,7 @@ These are needed to configure fan control by userspace programs, as the Dell BIO
 #### In detail
 - Install `lm_sensors` or `lm-sensors` package; it provides `fancontrol`
 - Run the below to clone and install `Dell BIOS fan control` executable
+- It will also disble the BIOS fan control, so that `fancontrol` can take over
 ```bash
 git clone https://github.com/TomFreudenberg/dell-bios-fan-control
 cd dell-bios-fan-control/
