@@ -31,30 +31,29 @@ sudo nano /etc/fancontrol
 Copy this in:
 ```
 # Configuration using stable udev symlinks
-INTERVAL=10
-AVERAGE=/dev/hwmon-dell/pwm1=5 /dev/hwmon-dell/pwm2=5
+INTERVAL=2
 
-# FCTEMPS: CPU temperature sensor
-#FCTEMPS=/dev/hwmon-dell/pwm2=/dev/hwmon-coretemp/temp4_input /dev/hwmon-dell/pwm1=/dev/hwmon-coretemp/temp4_input
-# FCTEMPS: Connect fan outputs to the Package sensor (temp1)
-FCTEMPS=/dev/hwmon-dell/pwm2=/dev/hwmon-coretemp/temp1_input /dev/hwmon-dell/pwm1=/dev/hwmon-coretemp/temp1_input
+# Mapping
+FCTEMPS=/dev/hwmon-dell/pwm1=/dev/hwmon-coretemp/temp1_input /dev/hwmon-dell/pwm2=/dev/hwmon-coretemp/temp1_input
+FCFANS=/dev/hwmon-dell/pwm1=/dev/hwmon-dell/fan1_input /dev/hwmon-dell/pwm2=/dev/hwmon-dell/fan2_input
 
-# FCFANS: Fan speed sensors
-FCFANS=/dev/hwmon-dell/pwm2=/dev/hwmon-dell/fan2_input /dev/hwmon-dell/pwm1=/dev/hwmon-dell/fan1_input
+# Smoothing (Keeps it steady)
+AVERAGE=/dev/hwmon-dell/pwm1=4 /dev/hwmon-dell/pwm2=4
 
-# TEMPERATURE SETTINGS
-MINTEMP=/dev/hwmon-dell/pwm2=20 /dev/hwmon-dell/pwm1=20
-MAXTEMP=/dev/hwmon-dell/pwm2=80 /dev/hwmon-dell/pwm1=80
+# THE FIX: Separate Start and Stop temps
+# Fans start spinning at 60°C
+MINTEMP=/dev/hwmon-dell/pwm1=60 /dev/hwmon-dell/pwm2=60
+# Fans stay pinned to MAX at 85°C
+MAXTEMP=/dev/hwmon-dell/pwm1=85 /dev/hwmon-dell/pwm2=85
 
-# PWM SETTINGS (80 is the minimum to prevent stop/start spikes)
-MINSTART=/dev/hwmon-dell/pwm2=80 /dev/hwmon-dell/pwm1=80
-MINSTOP=/dev/hwmon-dell/pwm2=80 /dev/hwmon-dell/pwm1=80
-MINPWM=/dev/hwmon-dell/pwm1=0 /dev/hwmon-dell/pwm2=0
+# MINSTOP is the key: It tells the fan to keep spinning until 50°C
+# Note: In some versions of fancontrol, you must set this logic via MINPWM and MINSTART
+MINSTART=/dev/hwmon-dell/pwm1=128 /dev/hwmon-dell/pwm2=128
+MINSTOP=/dev/hwmon-dell/pwm1=100 /dev/hwmon-dell/pwm2=100
+
+# Speed limits
+MINPWM=/dev/hwmon-dell/pwm1=100 /dev/hwmon-dell/pwm2=100
 MAXPWM=/dev/hwmon-dell/pwm1=255 /dev/hwmon-dell/pwm2=255
-
-# FAN CURVE STATES
-FCSTATES=/dev/hwmon-dell/pwm1=80=20 80=50 200=60 225=70 255=80
-FCSTATES=/dev/hwmon-dell/pwm2=80=20 80=50 200=60 225=70 255=80
 ```
 
 - Create the file `fancontrol-resume` and make it executable:
