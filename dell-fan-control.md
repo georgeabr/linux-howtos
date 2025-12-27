@@ -1,11 +1,5 @@
 ### Main programs
 These are needed to configure fan control by userspace programs, as the Dell BIOS suddenly starts and stops the fan
-- To configure sensors; first install `dell-bios-fan-control`:
-```bash
-sudo dell-bios-fan-control 0
-sudo sensors-detect
-sudo pwmconfig
-```
 #### In detail
 - Install `lm_sensors` or `lm-sensors` package; it provides `fancontrol`
 - Create a `udev` rule to properly get the Dell sensor name and locaiton
