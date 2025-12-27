@@ -2,6 +2,15 @@
 These are needed to configure fan control by userspace programs, as the Dell BIOS suddenly starts and stops the fan
 #### In detail
 - Install `lm_sensors` or `lm-sensors` package; it provides `fancontrol`
+- Run the below to clone and install `Dell BIOS fan control` executable
+```bash
+git clone https://github.com/TomFreudenberg/dell-bios-fan-control
+cd dell-bios-fan-control/
+make
+chmod +x dell-bios-fan-control
+sudo cp dell-bios-fan-control /usr/bin
+sudo dell-bios-fan-control 0
+```
 - Create a `udev` rule to properly get the Dell sensor name and locaiton
 ```bash
   sudo nano /etc/udev/rules.d/99-fancontrol-stable.rules
@@ -134,14 +143,6 @@ Wants=dell-bios-fan-control.service
 - Create `/etc/modprobe.d/dell_smm_hwmon.conf` (only if issues, not needed normally)
 ```
 options dell_smm_hwmon force=1
-```
-- Run the below to clone and install `Dell BIOS fan control` executable
-```bash
-git clone https://github.com/TomFreudenberg/dell-bios-fan-control
-cd dell-bios-fan-control/
-make
-chmod +x dell-bios-fan-control
-sudo cp dell-bios-fan-control /usr/bin
 ```
 ### Useful software to debug
 - `pwmtest.sh` to test fan RPM
