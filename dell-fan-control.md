@@ -1,4 +1,5 @@
 ### Main programs
+These instructions are for the Dell XPS 9570 laptop, to let `fancontrol` adjust the CPU and GPU fans  
 These are needed to configure fan control by userspace programs, as the Dell BIOS suddenly starts and stops the fan
 #### In detail
 - Install `lm_sensors` or `lm-sensors` package; it provides `fancontrol`
