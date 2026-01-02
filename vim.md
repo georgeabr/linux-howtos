@@ -164,5 +164,6 @@ These work with `vi` in RHEL 9:
 - `F/`	Jumps backward to the previous `/` (great for getting to the start of a word in a path)
 - `f/`	Jumps forward to the next `/`
 - `cw` deletes from cursor to separator and switches to insert mode
+- `>>`/`<<` - for indentation, `==` auto-indent only works on full `vim`
 - `dw` deletes from cursor to separator
 - basic movement `h`/`l`/`j`/`k`
